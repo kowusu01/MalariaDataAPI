@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4C025194-E3EA-4E69-A71D-16DDC4C7AD34}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\01-docker-postgres-run.bat = Scripts\01-docker-postgres-run.bat
+		Scripts\02-docker-copy-file-to-container.bat = Scripts\02-docker-copy-file-to-container.bat
+		Scripts\03-docker-postgres-execute-sql-script-via-psql.bat = Scripts\03-docker-postgres-execute-sql-script-via-psql.bat
+		Scripts\students.sql = Scripts\students.sql
+		Scripts\test-db-startup.sql = Scripts\test-db-startup.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "linux", "linux", "{F7246978-029F-4DC9-B030-FDBF139BEE88}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\linux\01_docker-postgresdb_startup.sh = Scripts\linux\01_docker-postgresdb_startup.sh
+		Scripts\linux\02_docker-postgresdb_startup.sh = Scripts\linux\02_docker-postgresdb_startup.sh
+		Scripts\linux\03_docker-postgresdb_startup.sh = Scripts\linux\03_docker-postgresdb_startup.sh
+		Scripts\linux\04_docker-postgresdb_startup.sh = Scripts\linux\04_docker-postgresdb_startup.sh
+		Scripts\linux\test-db-startup.sql = Scripts\linux\test-db-startup.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{5B53DB81-C8C6-4336-ABEB-5A7783AF732B}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\app-and-db-environments.jpg = Docs\app-and-db-environments.jpg
+		Docs\creating-the-app.txt = Docs\creating-the-app.txt
+		Docs\rapid-prototyping-notes.txt = Docs\rapid-prototyping-notes.txt
+		Docs\sample-app-notes.txt = Docs\sample-app-notes.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{D546A488-94E2-4C60-A6C3-92DF2991226D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EfCore", "EfCore\EfCore.csproj", "{AB37C89C-3AB5-4416-ACDC-E93F63C5A54F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonLib", "CommonLib\CommonLib.csproj", "{20C256C6-9C50-4848-9EE8-5D54A83E1961}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{071E573F-A153-4243-9A3A-0951605971B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D546A488-94E2-4C60-A6C3-92DF2991226D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D546A488-94E2-4C60-A6C3-92DF2991226D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D546A488-94E2-4C60-A6C3-92DF2991226D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D546A488-94E2-4C60-A6C3-92DF2991226D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB37C89C-3AB5-4416-ACDC-E93F63C5A54F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB37C89C-3AB5-4416-ACDC-E93F63C5A54F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB37C89C-3AB5-4416-ACDC-E93F63C5A54F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB37C89C-3AB5-4416-ACDC-E93F63C5A54F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20C256C6-9C50-4848-9EE8-5D54A83E1961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20C256C6-9C50-4848-9EE8-5D54A83E1961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20C256C6-9C50-4848-9EE8-5D54A83E1961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20C256C6-9C50-4848-9EE8-5D54A83E1961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{071E573F-A153-4243-9A3A-0951605971B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{071E573F-A153-4243-9A3A-0951605971B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{071E573F-A153-4243-9A3A-0951605971B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{071E573F-A153-4243-9A3A-0951605971B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F7246978-029F-4DC9-B030-FDBF139BEE88} = {4C025194-E3EA-4E69-A71D-16DDC4C7AD34}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3A7D417-C56C-46C4-93C9-C99EB2F3C081}
+	EndGlobalSection
+EndGlobal

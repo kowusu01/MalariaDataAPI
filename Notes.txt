@@ -1,0 +1,44 @@
+DB First approach
+
+Scenario & Goals
+- you have a db with tables generated, you don't want to generate the models manually
+- you want to take advantage of dontnet core dbcontext scaffolding but you want more control
+- after the scaffolding is done and all your models are created, take the classes generated and integrate into your project
+- update the code and clean it up, remove unnecessary files
+
+
+You can follow a a few steps to create DB context and models for dotnet core
+https://www.endpointdev.com/blog/2021/07/dotnet-5-web-api/
+
+
+
+0. start db in docker, e.g.:
+   docker run --name dev.postgres.app -e POSTGRES_PASSWORD=postgrespw -p 5432:5432 -d zkot2/postgresdb:v1
+
+- create a class library project to host the EFCore data layer
+- include the required nuget packages in the project
+  - Microsoft.EntityFrameworkCore.Tools
+  - Microsoft.EntityFrameworkCore.Design
+  - Npgsql.EntityFrameworkCore.PostgreSQL - for postgres  
+  - Microsoft.EntityFrameworkCore.SqlServer - for sqlserver
+  - make sure the project builds
+
+- in visual studio, set the startup project to the efcore project
+
+- use package manager console in visual studio
+- navigate to the efcore project folder
+
+
+1. get the connection string to the database that already has all the tables
+   for prototyping, you can create the db and the tables manually using sql script
+
+2. setup the project with the folder structure you want to follow
+
+3. in the project root folder, use the connection string and issue the following command from the .NET core cli
+   you have to know how to use the dotnet core cli even outside visual studio
+
+e.g.
+Package Manager Console Command:
+Scaffold-DbContext  -Connection “Host=localhost;Database=malariadb_dev;Username=postgres;Password=postgrespw” -Provider Npgsql.EntityFrameworkCore.PostgreSQL -StartupProject EfCore -Context AppDbContext -ContextNamespace EfCoreLayer -Namespace EfCoreLayer.Entities -OutputDir Entities -ContextDir DbContext
+
+4. inspect the files generated

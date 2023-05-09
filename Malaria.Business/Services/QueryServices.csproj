@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="IMalariaDataService.cs" />
+    <Compile Remove="MalariaDataService.cs" />
+    <Compile Remove="StudentService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Malaria.Common\CommonLib\CommonLib.csproj" />
+    <ProjectReference Include="..\..\Malaria.DataLayer\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\..\Malaria.DataLayer\EfCore\EfCore.csproj" />
+    <ProjectReference Include="..\BusinessQueriesTasks\BusinessQueries.csproj" />
+  </ItemGroup>
+
+</Project>

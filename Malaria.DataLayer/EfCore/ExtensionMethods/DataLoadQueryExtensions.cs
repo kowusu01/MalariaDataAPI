@@ -1,9 +1,6 @@
-﻿using Common.Models.MalariaData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
 using Common.Contants;
+using Common.Models.MalariaData;
 using Common.DataAccessParameters;
 
 namespace EfCoreLayer.ExtensionMethods

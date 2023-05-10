@@ -6,7 +6,9 @@ namespace Services.Queries
 {
     public interface IDataLoadQueryService
     {
-        Task<IEnumerable<LoadStat>> GetLoadStats();
+        Task<dynamic> GetLoadStats();
+        Task<dynamic> GetLoadStatsById(int id);
+        Task<dynamic> GetLoadStatsByDate(DateTime date);
         //Task<DataLoadStats> GetStudentById(int id);
     }
 }

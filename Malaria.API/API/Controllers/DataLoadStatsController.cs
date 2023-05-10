@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Common.Models.MalariaData;
 
 using Services.Queries;
+using CommonLib.ViewModels;
 
 namespace MalariaDataAPI
 {
@@ -29,31 +30,22 @@ namespace MalariaDataAPI
         [HttpGet("list")]
         public async Task<ActionResult<dynamic>> GetDataLoadStats()
         {
-            _logger.LogInformation("DataLoadStatatsController.GetDataLoadStats()...");
-
-            var dataLoads =  await _service.GetLoadStats();
-
-            if (dataLoads == null)
-            {
-                _logger.LogInformation("DataLoadStatatsController.GetDataLoadStats() - _context.LoadStats is null.");
-                return NotFound();
-            }
-
-            _logger.LogInformation("DataLoadStatatsController.GetDataLoadStats() - returning {0} out of {1} dataloads.", dataLoads.Count(), dataLoads.Count());
-
-            return new DataLoadList()
-            {
-                Meta = new ApiListMetaInfo()
-                {
-                    Location = "api/dataload/",
-                    TotalRecords = dataLoads.Count(),
-                    Page = 1,
-                    PageSize = 1
-                },
-                DataLoads = dataLoads
-            };
+            return await _service.GetLoadStats();
         }
+        
+        [HttpGet("load_id/{id}")]
+        public async Task<ActionResult<dynamic>> GetDataLoadStatsById(int id)
+        {
+            return await _service.GetLoadStatsById(id);
+        }
+        
 
+        [HttpGet("load_date/{load_date}")]
+        public async Task<ActionResult<dynamic>> GetDataLoadStatsByDate(DateTime load_date)
+        {
+            return await _service.GetLoadStatsByDate(load_date);
+        }
+        
 
 
     }

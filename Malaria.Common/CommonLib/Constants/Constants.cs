@@ -73,33 +73,37 @@
         public static readonly string Label = "CurrentEnvironmentLabel";
     }
 
-    public enum FilterByColumnsEnum
+    public enum FilterByColumnEnum
     {
-        ByUniqueId,
-        ByDataLoadId,
-        ByLineNumber,
-        ByCountry,
-        ByRegion,
-        ByNumCases,
-        ByNumDeaths,
-        ByDataErroes_NullValue,
-        ByDataInconsistency_NumCases_NumDeaths
-    }
+        no_filter,
+        id,
+        descr,
+        load_timestamp,
+        file_path,
+        completed,
+        num_records,
+        bad_data_count,
+        warning_data_count
+    };
 
-    public enum OrderByColumnsEnum
+    public enum OrderByColumnEnum
     {
-        ByDataLoadId,
-        ByLineNumber,
-        ByCountry,
-        ByRegion,
-        ByNumCases,
-        ByNumDeaths
-    }
+        default_ordering,
+        id,
+        load_id,
+        record_number,
+        country,
+        year,
+        num_cases,
+        num_deaths,
+        region,
+        load_timestamp
+    };
 
     public enum OrderBySchemeEnum
     {
-        DESC,
-        ASC
+        desc,
+        asc
     }
 
 

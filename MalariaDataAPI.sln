@@ -3,30 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4C025194-E3EA-4E69-A71D-16DDC4C7AD34}"
-	ProjectSection(SolutionItems) = preProject
-		Scripts\01-docker-postgres-run.bat = Scripts\01-docker-postgres-run.bat
-		Scripts\02-docker-copy-file-to-container.bat = Scripts\02-docker-copy-file-to-container.bat
-		Scripts\03-docker-postgres-execute-sql-script-via-psql.bat = Scripts\03-docker-postgres-execute-sql-script-via-psql.bat
-		Scripts\students.sql = Scripts\students.sql
-		Scripts\test-db-startup.sql = Scripts\test-db-startup.sql
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "linux", "linux", "{F7246978-029F-4DC9-B030-FDBF139BEE88}"
-	ProjectSection(SolutionItems) = preProject
-		Scripts\linux\01_docker-postgresdb_startup.sh = Scripts\linux\01_docker-postgresdb_startup.sh
-		Scripts\linux\02_docker-postgresdb_startup.sh = Scripts\linux\02_docker-postgresdb_startup.sh
-		Scripts\linux\03_docker-postgresdb_startup.sh = Scripts\linux\03_docker-postgresdb_startup.sh
-		Scripts\linux\04_docker-postgresdb_startup.sh = Scripts\linux\04_docker-postgresdb_startup.sh
-		Scripts\linux\test-db-startup.sql = Scripts\linux\test-db-startup.sql
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{5B53DB81-C8C6-4336-ABEB-5A7783AF732B}"
 	ProjectSection(SolutionItems) = preProject
-		Docs\app-and-db-environments.jpg = Docs\app-and-db-environments.jpg
-		Docs\creating-the-app.txt = Docs\creating-the-app.txt
-		Docs\rapid-prototyping-notes.txt = Docs\rapid-prototyping-notes.txt
-		Docs\sample-app-notes.txt = Docs\sample-app-notes.txt
+		Docs\malaria-api-notes.txt = Docs\malaria-api-notes.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Malaria.API", "Malaria.API", "{FAE57BD7-2E19-4A9D-8CC6-8FCE594C2AC4}"
@@ -52,6 +31,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{9D7A4F2E-EF82-4CAF-8C62-9D87470F9590}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryServices", "Malaria.Business\Services\QueryServices.csproj", "{E3325191-123B-4FD2-BD80-936F1823359D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{5B83CCB1-F36F-4402-AF1F-219CFB59BA6B}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\clean_up.sql = Scripts\clean_up.sql
+		Scripts\malaria_db_setup.sql = Scripts\malaria_db_setup.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,7 +73,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F7246978-029F-4DC9-B030-FDBF139BEE88} = {4C025194-E3EA-4E69-A71D-16DDC4C7AD34}
 		{CD300722-3242-4323-87F8-367E95BB90FB} = {FAE57BD7-2E19-4A9D-8CC6-8FCE594C2AC4}
 		{15F209F1-AEF3-4499-B85A-41D91C2F1B51} = {41277ACE-1FC9-4C34-8A6E-FF5D43BCEC29}
 		{EC1D8B82-2ABE-46CD-AC7B-D45C10FB0195} = {00E9A906-6330-43A6-8D11-01AC2C2D33BA}

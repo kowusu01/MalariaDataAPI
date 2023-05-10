@@ -1,0 +1,8 @@
+
+Adding filtering, sorting and ordering to efcore
+
+Approach
+ - add extension method to efcore dbcontext to apply the query actions filtering, sorting and ordering to the appropraiet collection
+ - the query actions are added to the efcore query builder but not executed
+ - all query actions are translated to sql and executed on the db side
+ - in a layered app, the class the has access the efcore is the one that can perform this task

@@ -1,9 +1,10 @@
 ﻿
 using Common.DataAccessParameters;
 using Common.Models.MalariaData;
-using EfCoreLayer;
-using Microsoft.EntityFrameworkCore;
 
+using Microsoft.EntityFrameworkCore;
+using EfCoreLayer;
+using EfCoreLayer.ExtensionMethods;
 namespace DataAccess
 {
     public class LoadStatsDataAccess : ILoadStatsDataAccess
@@ -15,7 +16,12 @@ namespace DataAccess
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<LoadStat>> Get(DataAccessQueryParameters queryParams) => await _dbContext.LoadStats.ToListAsync();
+        public async Task<IEnumerable<LoadStat>> Get(DataAccessQueryParameters queryParams)
+        {
+            Console.WriteLine("==========================");
+            Console.WriteLine("Data param: " + queryParams.FilterByColumnValue);
+            return await _dbContext.LoadStats.FilterBy(queryParams).ToListAsync();
+        }
 
     }
 }

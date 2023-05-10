@@ -10,6 +10,7 @@ using Common.DataAccessParameters;
 
 using EfCoreLayer;
 using Business.QueryTasks;
+using CommonLib.ViewModels;
 
 namespace Services.Queries
 {
@@ -29,14 +30,63 @@ namespace Services.Queries
             _taskRunner = runnerObj;
         }
 
-        public async Task<IEnumerable<LoadStat>> GetLoadStats()
+        public async Task<dynamic> GetLoadStats()
         {
             // select a runner 
             // convert params to querypParams
             // execute
             // convert reult to view model and return
              
-             return await _taskRunner.RunTasks(new DataAccessQueryParameters());
+            var data  =  await _taskRunner.RunTasks(new DataAccessQueryParameters());
+            return MapListDataToViewModel(data);
         }
+        public async Task<dynamic> GetLoadStatsById(int id)
+        {
+            // select a runner 
+            // convert params to querypParams
+            // execute
+            // convert reult to view model and return
+
+            var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.id, FilterByColumnValue = id.ToString() });
+            return MapListDataToViewModel(data);
+        }
+        public async Task<dynamic> GetLoadStatsByDate(DateTime loadDate)
+        {
+            // select a runner 
+            // convert params to querypParams
+            // execute
+            // convert reult to view model and return
+            Console.WriteLine("===================>> Request Date: " + loadDate.ToString());
+            var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.load_timestamp, FilterByColumnValue = loadDate.ToString() });
+            return MapListDataToViewModel(data);
+        }
+
+        private dynamic MapListDataToViewModel(IEnumerable<LoadStat> data)
+        {
+            return new DataLoadStatsListViewModel()
+            {
+                Meta = new ApiResultListMetaInfo()
+                {
+                    Location = "api/dataload/",
+                    TotalRecords = data.Count(),
+                    Page = 1,
+                    PageSize = 1
+                },
+                DataLoadStats = data
+            };
+        }
+        private dynamic MapDataToViewModel(LoadStat data)
+        {
+            return new DataLoadStatsSingleItemViewModel()
+            {
+                Meta = new ApiResultMetaInfo()
+                {
+                    Location = "api/dataload/",
+                },
+                DataLoadStats = data
+            };
+        }
+
+
     }
 }

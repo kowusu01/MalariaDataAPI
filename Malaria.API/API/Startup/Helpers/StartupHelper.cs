@@ -76,7 +76,7 @@ namespace API.Startup
                     app.Logger.LogInformation("Seeding InMemory database..." + DateTime.Now);
                     var services = scope.ServiceProvider;
 
-                    // retrieve the dbconext object from trhe DI
+                    // retrieve the dbconext object from the DI
                     var dbContext = services.GetRequiredService<AppDbContext>();
                     Seeding.SeedMalariaDBAsync(dbContext, "DOTNET_CORE_INMEMORY_DB", "Simple, fast, reliable in-memory database for quick prototyping.");
                     app.Logger.LogInformation("Done seeding InMemory database.  - " + DateTime.Now);
@@ -86,11 +86,21 @@ namespace API.Startup
 
         public static void BindServices(WebApplicationBuilder builder)
         {
-            //builder.Services.AddScoped<ITestService, TestService>();
+            // services
             builder.Services.AddScoped<IDataLoadQueryService, DataLoadQueryService>();
+            builder.Services.AddScoped<ICompleteDataQueryService, CompleteDataQueryService>();
+
+            // task runners
             builder.Services.AddScoped<IDataLoadQueryTaskRunner, DataLoadQueryTaskRunner>();
+            builder.Services.AddScoped<ICompleteDataQueryTaskRunner, CompleteDataQueryTaskRunner>();
+
+            // tasks
             builder.Services.AddScoped<IDataLoadQueryTask, DataLoadQueryTask>();
-            builder.Services.AddScoped<ILoadStatsDataAccess, LoadStatsDataAccess>();
-        }           
+            builder.Services.AddScoped<ICompleteDataQueryTask, CompleteDataQueryTask>();
+
+            // data access
+            builder.Services.AddScoped<IDataAccessLoadStats, DataAccessLoadStats>();
+            builder.Services.AddScoped<IDataAccessGoodData, DataAccessGoodData>();
+        }
     }    
 }

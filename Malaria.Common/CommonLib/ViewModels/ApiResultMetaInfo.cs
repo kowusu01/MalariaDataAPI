@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Common.Models;
 
-namespace CommonLib.ViewModels
+namespace Common.ViewModels
 {
     public class ApiResultMetaInfo
     {

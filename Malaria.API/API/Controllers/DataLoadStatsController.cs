@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Common.Models.MalariaData;
 
 using Services.Queries;
-using CommonLib.ViewModels;
+using Common.ViewModels;
 
 namespace MalariaDataAPI
 {

@@ -5,19 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommonLib.ViewModels
+namespace Common.ViewModels
 {
     
-    public partial class DataLoadStatsSingleItemViewModel
+    public partial class ApiResultSingleItemViewModel
     {
-        public ApiResultMetaInfo Meta { get; set; }
-        public LoadStat DataLoadStats { get; set; }
+        public ApiResultMetaInfo meta { get; set; }
+        public dynamic data { get; set; }
     }
 
-    public partial class DataLoadStatsListViewModel
+    public partial class ApiResultListViewModel
     {
-        public ApiResultListMetaInfo Meta { get; set; }
-        public IEnumerable<LoadStat> DataLoadStats { get; set; }
+        public ApiResultListMetaInfo meta { get; set; }
+        public dynamic data { get; set; }
     }
 
 }

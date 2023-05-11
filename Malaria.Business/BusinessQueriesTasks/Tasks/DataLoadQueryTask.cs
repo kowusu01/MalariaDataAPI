@@ -11,9 +11,9 @@ namespace Business.QueryTasks
 
 	public class DataLoadQueryTask : AbstractBusinessTaskErrors, IDataLoadQueryTask
 	{
-		private readonly ILoadStatsDataAccess _dataAccess;
+		private readonly IDataAccessLoadStats _dataAccess;
 
-		public DataLoadQueryTask(ILoadStatsDataAccess dataAccess)
+		public DataLoadQueryTask(IDataAccessLoadStats dataAccess)
 		{
 			_dataAccess = dataAccess;
 		}

@@ -14,7 +14,9 @@ namespace Common.Models.MalariaData
         public int LoadId { get; set; }
 
         public int RecordNumber { get; set; }
+
         public string? Country { get; set; }
+        
         public string? Year { get; set; }
 
         [DataMember(Name = "NumberOfCases")]

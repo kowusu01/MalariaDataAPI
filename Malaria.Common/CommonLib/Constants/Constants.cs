@@ -75,29 +75,30 @@
 
     public enum FilterByColumnEnum
     {
-        no_filter,
-        id,
-        descr,
-        load_timestamp,
-        file_path,
-        completed,
-        num_records,
-        bad_data_count,
-        warning_data_count
+        NoFiltering,
+        Id,
+        RecordNumber,
+        Descr,
+        LoadTimestamp,
+        FilePath,
+        Completed,
+        NumRecords,
+        BadDataCount,
+        WarningDataCount
     };
 
     public enum OrderByColumnEnum
     {
-        default_ordering,
-        id,
-        load_id,
-        record_number,
-        country,
-        year,
-        num_cases,
-        num_deaths,
-        region,
-        load_timestamp
+        DefaultOrdering,
+        Id,
+        LoadId,
+        RecordNumber,
+        Country,
+        Year,
+        NumCases,
+        NumDeaths,
+        Region,
+        LoadTimestamp
     };
 
     public enum OrderBySchemeEnum

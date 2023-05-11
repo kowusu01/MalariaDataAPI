@@ -16,6 +16,8 @@
     <Compile Remove="DbContext\DbContextDefault.cs" />
     <Compile Remove="DbContext\DbContextMalariaDataApp.cs" />
     <Compile Remove="DbContext\DbContextTutorsApp.cs" />
+    <Compile Remove="ExtensionMethods\DataIssuesDetailsQueryExtensions.cs" />
+    <Compile Remove="ExtensionMethods\GoodDataQueryExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>

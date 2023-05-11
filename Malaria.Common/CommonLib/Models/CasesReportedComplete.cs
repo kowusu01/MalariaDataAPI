@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Xml.Linq;
+﻿using System.Runtime.Serialization;
 
 namespace Common.Models.MalariaData
 {
@@ -9,12 +6,14 @@ namespace Common.Models.MalariaData
     {
         [DataMember(Name = "UniqueId")]
         public int Id { get; set; }
-
+        
         [DataMember(Name ="DataLoadId")]
         public int LoadId { get; set; }
-
+        
         public int RecordNumber { get; set; }
+
         public string Country { get; set; } = null!;
+        
         public int Year { get; set; }
 
         [DataMember(Name ="NumberOfCases")]
@@ -25,5 +24,7 @@ namespace Common.Models.MalariaData
 
         [DataMember(Name = "WHO Region")]
         public string Region { get; set; } = null!;
+
+        public LoadStat DataLoadStat { get; set; }
     }
 }

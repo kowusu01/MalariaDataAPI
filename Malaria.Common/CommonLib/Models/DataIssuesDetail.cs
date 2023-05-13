@@ -16,6 +16,11 @@ namespace Common.Models.MalariaData
         public int RecordNumber { get; set; }
         
         public string? ColumnName { get; set; }
+
+        /// <summary>
+        /// error or warning
+        /// </summary>
+        public string IssueType { get; set; }
         
         public string Issue { get; set; } = null!;
     }

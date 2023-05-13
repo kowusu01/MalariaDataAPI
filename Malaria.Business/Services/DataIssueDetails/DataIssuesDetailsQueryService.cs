@@ -11,27 +11,31 @@ using Common.ViewModels;
 
 namespace Services.Queries
 {
+    
 
-    public interface ICompleteDataQueryService : IGenericServiceInterface
+    public interface IDataIssuesDetailsQueryService : IGenericServiceInterface
     {
+        Task<dynamic> GetByIssueType(string issueType);
     }
-
-
-    public class CompleteDataQueryService : ICompleteDataQueryService
+    
+    public class DataIssuesDetailsQueryService : IDataIssuesDetailsQueryService
     {
-        private readonly ILogger<CompleteDataQueryService> _logger;
+        private readonly ILogger<DataIssuesDetailsQueryService> _logger;
 
+        
         //private readonly AppDbContext _dbContext;
 
         // this service has only one task runner, DataLoadStatsTaskRUnner
-        private readonly ICompleteDataQueryTaskRunner _taskRunner;
+        private readonly IDataIssuesDetailsQueryTaskRunner _taskRunner;
 
-        public CompleteDataQueryService(ILogger<CompleteDataQueryService> logger, ICompleteDataQueryTaskRunner runnerObj)
+        public DataIssuesDetailsQueryService(ILogger<DataIssuesDetailsQueryService> logger, IDataIssuesDetailsQueryTaskRunner runnerObj)
         {
-            _logger = logger;
+
             //    _dbContext = dbContext;
+            _logger = logger;
             _taskRunner = runnerObj;
         }
+
         
         public async Task<dynamic> GetData()
         {
@@ -66,6 +70,11 @@ namespace Services.Queries
         public async Task<dynamic> GetByFileName(string fileName)
         {
             var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.FilePath, FilterByColumnValue = fileName });
+            return ServicesHelper.MapListDataToViewModel(data);
+        }
+        public async Task<dynamic> GetByIssueType(string issueType)
+        {
+            var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.IssueType, FilterByColumnValue = issueType });
             return ServicesHelper.MapListDataToViewModel(data);
         }
     }

@@ -11,28 +11,31 @@ using Common.ViewModels;
 
 namespace Services.Queries
 {
-
-    public interface ICompleteDataQueryService : IGenericServiceInterface
+   
+    
+    public interface IBadDataQueryService : IGenericServiceInterface
     {
+        // mainly for dependency injection
+        // and also for adding additional methods
     }
 
 
-    public class CompleteDataQueryService : ICompleteDataQueryService
+    public class BadDataQueryService : IBadDataQueryService
     {
-        private readonly ILogger<CompleteDataQueryService> _logger;
+        private readonly ILogger<BadDataQueryService> _logger;
 
         //private readonly AppDbContext _dbContext;
 
         // this service has only one task runner, DataLoadStatsTaskRUnner
-        private readonly ICompleteDataQueryTaskRunner _taskRunner;
+        private readonly IBadDataQueryTaskRunner _taskRunner;
 
-        public CompleteDataQueryService(ILogger<CompleteDataQueryService> logger, ICompleteDataQueryTaskRunner runnerObj)
+        public BadDataQueryService(ILogger<BadDataQueryService> logger, IBadDataQueryTaskRunner runnerObj)
         {
             _logger = logger;
             //    _dbContext = dbContext;
             _taskRunner = runnerObj;
         }
-        
+
         public async Task<dynamic> GetData()
         {
             // select a runner 

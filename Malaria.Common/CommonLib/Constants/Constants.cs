@@ -77,6 +77,7 @@
     {
         NoFiltering,
         Id,
+        LoadId,
         RecordNumber,
         Descr,
         LoadTimestamp,
@@ -84,7 +85,8 @@
         Completed,
         NumRecords,
         BadDataCount,
-        WarningDataCount
+        WarningDataCount,
+        IssueType
     };
 
     public enum OrderByColumnEnum
@@ -98,7 +100,9 @@
         NumCases,
         NumDeaths,
         Region,
-        LoadTimestamp
+        LoadTimestamp,
+        IssueType
+
     };
 
     public enum OrderBySchemeEnum

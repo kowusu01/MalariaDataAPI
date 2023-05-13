@@ -16,9 +16,11 @@ namespace EfCoreLayer.ExtensionMethods
             {
                 case FilterByColumnEnum.NoFiltering:
                     return efCoreData;
+
                 case FilterByColumnEnum.Id:
                     int id = int.Parse(queryParameters.FilterByColumnValue);
-                    return efCoreData.Where(x=>x.Id == id);
+                    return efCoreData.Where(x=>x.Id == id);                
+
                 case FilterByColumnEnum.LoadTimestamp:
                     var results = efCoreData;
                     try
@@ -45,9 +47,15 @@ namespace EfCoreLayer.ExtensionMethods
             {
                 case FilterByColumnEnum.NoFiltering:
                     return efCoreData;
+
                 case FilterByColumnEnum.Id:
                     int id = int.Parse(queryParameters.FilterByColumnValue);
                     return efCoreData.Where(x => x.Id == id);
+
+                case FilterByColumnEnum.LoadId:
+                    int loadId = int.Parse(queryParameters.FilterByColumnValue);
+                    return efCoreData.Where(x => x.LoadId == loadId);
+
                 case FilterByColumnEnum.RecordNumber:
                     int paramValue = int.Parse(queryParameters.FilterByColumnValue);
                     return efCoreData.Where(x => x.RecordNumber == paramValue);
@@ -79,14 +87,20 @@ namespace EfCoreLayer.ExtensionMethods
             {
                 case FilterByColumnEnum.NoFiltering:
                     return efCoreData;
+
                 case FilterByColumnEnum.Id:
                     int id = int.Parse(queryParameters.FilterByColumnValue);
                     return efCoreData.Where(x => x.Id == id);
+
+                case FilterByColumnEnum.LoadId:
+                    int loadId = int.Parse(queryParameters.FilterByColumnValue);
+                    return efCoreData.Where(x => x.LoadId == loadId);
+
                 case FilterByColumnEnum.RecordNumber:
                     int paramValue = int.Parse(queryParameters.FilterByColumnValue);
                     return efCoreData.Where(x => x.RecordNumber == paramValue);
                 
-                case FilterByColumnEnum:
+                case FilterByColumnEnum.LoadTimestamp:
                     var results = efCoreData;
                     try
                     {
@@ -113,13 +127,27 @@ namespace EfCoreLayer.ExtensionMethods
             {
                 case FilterByColumnEnum.NoFiltering:
                     return efCoreData;
+
                 case FilterByColumnEnum.Id:
                     int id = int.Parse(queryParameters.FilterByColumnValue);
                     return efCoreData.Where(x => x.Id == id);
+
+                case FilterByColumnEnum.LoadId:
+                    int loadId = int.Parse(queryParameters.FilterByColumnValue);
+                    return efCoreData.Where(x => x.LoadId == loadId);
+
                 case FilterByColumnEnum.RecordNumber:
                     int paramValue = int.Parse(queryParameters.FilterByColumnValue);
                     return efCoreData.Where(x => x.RecordNumber == paramValue);
+
+                
+                case FilterByColumnEnum.IssueType:
+                    return efCoreData.Where(x => x.IssueType.ToLower() == queryParameters.FilterByColumnValue.ToLower());
                 /*
+                 
+                case FilterByColumnEnum.FilePath:
+                    return efCoreData.Where(x => x.FilePath == queryParameters.FilterByColumnValue);
+
                 case FilterByColumnEnum.load_timestamp:
                     var results = efCoreData;
                     try

@@ -49,7 +49,15 @@ namespace EfCoreLayer
                     .HasMaxLength(255)
                     .HasColumnName("country");
 
-                entity.Property(e => e.LoadId).HasColumnName("load_id");
+                entity.Property(e => e.Year)
+                    .HasMaxLength(255)
+                    .HasColumnName("year");
+
+                entity.Property(e => e.LoadId)
+                    .HasColumnName("load_id");
+
+                entity.Property(e => e.RecordNumber)
+                    .HasColumnName("record_number");
 
                 entity.Property(e => e.NumCases)
                     .HasMaxLength(255)
@@ -59,15 +67,10 @@ namespace EfCoreLayer
                     .HasMaxLength(255)
                     .HasColumnName("num_deaths");
 
-                entity.Property(e => e.RecordNumber).HasColumnName("record_number");
-
                 entity.Property(e => e.Region)
                     .HasMaxLength(255)
                     .HasColumnName("region");
 
-                entity.Property(e => e.Year)
-                    .HasMaxLength(255)
-                    .HasColumnName("year");
             });
 
             modelBuilder.Entity<CasesReportedComplete>(entity =>
@@ -78,23 +81,29 @@ namespace EfCoreLayer
                     .HasColumnName("id")
                     .UseIdentityAlwaysColumn();
 
+                entity.Property(e => e.LoadId)
+                    .HasColumnName("load_id");
+
                 entity.Property(e => e.Country)
                     .HasMaxLength(255)
                     .HasColumnName("country");
 
-                entity.Property(e => e.LoadId).HasColumnName("load_id");
+                entity.Property(e => e.Year)
+                    .HasColumnName("year");
 
-                entity.Property(e => e.NumCases).HasColumnName("num_cases");
+                entity.Property(e => e.RecordNumber)
+                    .HasColumnName("record_number");
 
-                entity.Property(e => e.NumDeaths).HasColumnName("num_deaths");
+                entity.Property(e => e.NumCases)
+                    .HasColumnName("num_cases");
 
-                entity.Property(e => e.RecordNumber).HasColumnName("record_number");
+                entity.Property(e => e.NumDeaths)
+                    .HasColumnName("num_deaths");
 
                 entity.Property(e => e.Region)
                     .HasMaxLength(255)
                     .HasColumnName("region");
 
-                entity.Property(e => e.Year).HasColumnName("year");
             });
 
             modelBuilder.Entity<DataIssuesDetail>(entity =>
@@ -105,17 +114,24 @@ namespace EfCoreLayer
                     .HasColumnName("id")
                     .UseIdentityAlwaysColumn();
 
+                entity.Property(e => e.LoadId)
+                    .HasColumnName("load_id");
+
+                entity.Property(e => e.RecordNumber)
+                    .HasColumnName("record_number");
+
                 entity.Property(e => e.ColumnName)
                     .HasMaxLength(255)
                     .HasColumnName("column_name");
 
+                entity.Property(e => e.IssueType)
+                    .HasMaxLength(25)
+                    .HasColumnName("issue_type");
+
                 entity.Property(e => e.Issue)
                     .HasMaxLength(255)
                     .HasColumnName("issue");
-
-                entity.Property(e => e.LoadId).HasColumnName("load_id");
-
-                entity.Property(e => e.RecordNumber).HasColumnName("record_number");
+                
             });
 
             modelBuilder.Entity<EnvInfo>(entity =>
@@ -151,7 +167,9 @@ namespace EfCoreLayer
 
                 entity.Property(e => e.BadDataCount).HasColumnName("bad_data_count");
 
-                entity.Property(e => e.Completed).HasColumnName("completed");
+                entity.Property(e => e.LoadStatus)
+                    .HasColumnName("load_status")
+                    .HasMaxLength(25);
 
                 entity.Property(e => e.Descr)
                     .HasMaxLength(255)

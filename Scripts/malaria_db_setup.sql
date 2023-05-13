@@ -28,7 +28,7 @@ create table load_stats (
   descr varchar(255),
   load_timestamp timestamptz  not null default now(),  
   file_path varchar(255),
-  completed boolean not null,
+  load_status varchar(25) not null, -- Success or Failure
   num_records integer not null,
   bad_data_count integer not null default 0, 
   warning_data_count integer default 0,
@@ -66,6 +66,7 @@ create table data_issues_details(
   id integer not null GENERATED ALWAYS AS IDENTITY primary key,
   load_id integer not null,
   record_number int not null, --line number from the file
-  column_name varchar(255),
+  column_name varchar(255) not null,
+  issue_type varchar(25) not null, -- Error or Warning
   issue varchar(255) not null
 )

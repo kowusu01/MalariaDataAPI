@@ -7,16 +7,16 @@ using Common.ViewModels;
 
 namespace MalariaDataAPI
 {
-    [Route("api/complete-data")]
+    [Route("api/data-issues")]
     [ApiController]
     [Produces("application/json")]
-    public class CompleteCasesController : ControllerBase
+    public class DataIssuesController : ControllerBase
     {
-        private readonly ILogger<CompleteCasesController> _logger;
+        private readonly ILogger<DataIssuesController> _logger;
 
-        readonly ICompleteDataQueryService _service;
+        readonly IDataIssuesDetailsQueryService _service;
 
-        public CompleteCasesController(ILogger<CompleteCasesController> logger, ICompleteDataQueryService service)
+        public DataIssuesController(ILogger<DataIssuesController> logger, IDataIssuesDetailsQueryService service)
         {
             _logger = logger;
             _service = service;
@@ -57,15 +57,16 @@ namespace MalariaDataAPI
         {
             return await _service.GetByLoadDate(load_date);
         }
-
-        [HttpGet("filename/{filename}")]
-        public async Task<ActionResult<dynamic>> GetByFileName(string fileName)
+        [HttpGet("issue_type/{issue_type}")]
+        public async Task<ActionResult<dynamic>> GetByIssueType(string issue_type)
         {
-            return await _service.GetByFileName(fileName);
+            return await _service.GetByIssueType(issue_type);
         }
-
-
-
+        [HttpGet("filename/{filename}")]
+        public async Task<ActionResult<dynamic>> GetByFileName(string filename)
+        {
+            return await _service.GetByFileName(filename);
+        }
 
     }
 }

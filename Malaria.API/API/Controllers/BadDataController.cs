@@ -1,22 +1,20 @@
 ﻿
-using Microsoft.AspNetCore.Mvc;
-using Common.Models.MalariaData;
 
+using Microsoft.AspNetCore.Mvc;
 using Services.Queries;
-using Common.ViewModels;
 
 namespace MalariaDataAPI
 {
-    [Route("api/complete-data")]
+    [Route("api/bad-data")]
     [ApiController]
     [Produces("application/json")]
-    public class CompleteCasesController : ControllerBase
+    public class BadDataController : ControllerBase
     {
-        private readonly ILogger<CompleteCasesController> _logger;
+        private readonly ILogger<BadDataController> _logger;
 
-        readonly ICompleteDataQueryService _service;
+        readonly IBadDataQueryService _service;
 
-        public CompleteCasesController(ILogger<CompleteCasesController> logger, ICompleteDataQueryService service)
+        public BadDataController(ILogger<BadDataController> logger, IBadDataQueryService service)
         {
             _logger = logger;
             _service = service;
@@ -38,7 +36,6 @@ namespace MalariaDataAPI
         {
             return await _service.GetById(id);
         }
-
 
         [HttpGet("load_id/{load_id}")]
         public async Task<ActionResult<dynamic>> GetByLoadId(int load_id)

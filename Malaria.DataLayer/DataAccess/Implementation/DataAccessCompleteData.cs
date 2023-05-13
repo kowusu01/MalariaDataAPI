@@ -15,11 +15,11 @@ namespace DataAccess
     }
     
 
-    public class DataAccessGoodData : IDataAccessGoodData
+    public class DataAccessCompleteData : IDataAccessGoodData
     {
         private readonly AppDbContext _dbContext;
 
-        public DataAccessGoodData(AppDbContext dbContext)
+        public DataAccessCompleteData(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }

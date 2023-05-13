@@ -10,13 +10,13 @@ namespace MalariaDataAPI
     [Route("api/dataload")]
     [ApiController]
     [Produces("application/json")]
-    public class DataLoadStatatsController : ControllerBase
+    public class DataLoadStatsController : ControllerBase
     {
-        private readonly ILogger<DataLoadStatatsController> _logger;
+        private readonly ILogger<DataLoadStatsController> _logger;
 
         readonly IDataLoadQueryService _service;
 
-        public DataLoadStatatsController(ILogger<DataLoadStatatsController> logger, IDataLoadQueryService service)
+        public DataLoadStatsController(ILogger<DataLoadStatsController> logger, IDataLoadQueryService service)
         {
             _logger = logger;
             _service = service;
@@ -28,22 +28,28 @@ namespace MalariaDataAPI
         /// <returns></returns>
 
         [HttpGet("list")]
-        public async Task<ActionResult<dynamic>> GetDataLoadStats()
+        public async Task<ActionResult<dynamic>> List()
         {
-            return await _service.GetLoadStats();
+            return await _service.GetData();
         }
-        
-        [HttpGet("load_id/{id}")]
-        public async Task<ActionResult<dynamic>> GetDataLoadStatsById(int id)
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<dynamic>> GetById(int id)
         {
-            return await _service.GetLoadStatsById(id);
+            return await _service.GetById(id);
         }
-        
+
+
+        [HttpGet("load_id/{load_id}")]
+        public async Task<ActionResult<dynamic>> GetByLoadId(int load_id)
+        {
+            return await _service.GetByLoadId(load_id);
+        }
 
         [HttpGet("load_date/{load_date}")]
-        public async Task<ActionResult<dynamic>> GetDataLoadStatsByDate(DateTime load_date)
+        public async Task<ActionResult<dynamic>> GetByDate(DateTime load_date)
         {
-            return await _service.GetLoadStatsByDate(load_date);
+            return await _service.GetByLoadDate(load_date);
         }
         
 

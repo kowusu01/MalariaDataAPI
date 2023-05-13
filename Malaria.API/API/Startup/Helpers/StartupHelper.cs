@@ -89,18 +89,28 @@ namespace API.Startup
             // services
             builder.Services.AddScoped<IDataLoadQueryService, DataLoadQueryService>();
             builder.Services.AddScoped<ICompleteDataQueryService, CompleteDataQueryService>();
+            builder.Services.AddScoped<IBadDataQueryService, BadDataQueryService>();
+            builder.Services.AddScoped<IDataIssuesDetailsQueryService, DataIssuesDetailsQueryService>();
 
             // task runners
             builder.Services.AddScoped<IDataLoadQueryTaskRunner, DataLoadQueryTaskRunner>();
             builder.Services.AddScoped<ICompleteDataQueryTaskRunner, CompleteDataQueryTaskRunner>();
-
+            builder.Services.AddScoped<IBadDataQueryTaskRunner, BadDataQueryTaskRunner>();
+            builder.Services.AddScoped<IDataIssuesDetailsQueryTaskRunner, DataIssuesDetailsQueryTaskRunner>();
+            
             // tasks
             builder.Services.AddScoped<IDataLoadQueryTask, DataLoadQueryTask>();
             builder.Services.AddScoped<ICompleteDataQueryTask, CompleteDataQueryTask>();
+            builder.Services.AddScoped<IBadDataQueryTask, BadDataQueryTask>();
+            builder.Services.AddScoped<IDataIssuesDetailsQueryTask, DataIssuesDetailsQueryTask>();
 
             // data access
             builder.Services.AddScoped<IDataAccessLoadStats, DataAccessLoadStats>();
-            builder.Services.AddScoped<IDataAccessGoodData, DataAccessGoodData>();
+            builder.Services.AddScoped<IDataAccessGoodData, DataAccessCompleteData>();
+
+            builder.Services.AddScoped<IDataAccessBadData, DataAccessBadData>();
+            builder.Services.AddScoped<IDataAccessDataIssuesDetails, DataAccessDataIssuesDetails>();
+            //
         }
     }    
 }

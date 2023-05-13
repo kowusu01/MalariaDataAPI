@@ -25,9 +25,8 @@ namespace Common.Models.MalariaData
         [JsonPropertyOrder(4)]
         public string? FilePath { get; set; }
 
-        [DataMember(Name = "CompletedSuccessfully")]
         [JsonPropertyOrder(5)]
-        public bool Completed { get; set; }
+        public string LoadStatus { get; set; }
 
         [DataMember(Name = "TotalRecords")]
         [JsonPropertyOrder(6)]

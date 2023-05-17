@@ -61,11 +61,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Malaria.Business\BusinessQueriesTasks\BusinessQueries.csproj" />
-    <ProjectReference Include="..\..\Malaria.Business\Services\QueryServices.csproj" />
-    <ProjectReference Include="..\..\Malaria.Common\CommonLib\CommonLib.csproj" />
-    <ProjectReference Include="..\..\Malaria.DataLayer\DataAccess\DataAccess.csproj" />
-    <ProjectReference Include="..\..\Malaria.DataLayer\EfCore\EfCore.csproj" />
+    <ProjectReference Include="..\Malaria.Business\BusinessQueriesTasks\BusinessQueries.csproj" />
+    <ProjectReference Include="..\Malaria.Business\Services\QueryServices.csproj" />
+    <ProjectReference Include="..\Malaria.Common\CommonLib\CommonLib.csproj" />
+    <ProjectReference Include="..\Malaria.DataLayer\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\Malaria.DataLayer\EfCore\EfCore.csproj" />
   </ItemGroup>
 
 </Project>

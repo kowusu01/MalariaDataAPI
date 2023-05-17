@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Malaria.Business", "Malaria
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Malaria.Data", "Malaria.Data", "{00E9A906-6330-43A6-8D11-01AC2C2D33BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "Malaria.API\API\API.csproj", "{CD300722-3242-4323-87F8-367E95BB90FB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonLib", "Malaria.Common\CommonLib\CommonLib.csproj", "{15F209F1-AEF3-4499-B85A-41D91C2F1B51}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "Malaria.DataLayer\DataAccess\DataAccess.csproj", "{EC1D8B82-2ABE-46CD-AC7B-D45C10FB0195}"
@@ -38,16 +36,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{5B83
 		Scripts\malaria_db_setup.sql = Scripts\malaria_db_setup.sql
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MalariaDataAPI", "Malaria.API\MalariaDataAPI.csproj", "{3869565E-372A-48BD-85F4-A044B3E8A24B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CD300722-3242-4323-87F8-367E95BB90FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD300722-3242-4323-87F8-367E95BB90FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD300722-3242-4323-87F8-367E95BB90FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD300722-3242-4323-87F8-367E95BB90FB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15F209F1-AEF3-4499-B85A-41D91C2F1B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{15F209F1-AEF3-4499-B85A-41D91C2F1B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15F209F1-AEF3-4499-B85A-41D91C2F1B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,12 +64,15 @@ Global
 		{E3325191-123B-4FD2-BD80-936F1823359D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3325191-123B-4FD2-BD80-936F1823359D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3325191-123B-4FD2-BD80-936F1823359D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3869565E-372A-48BD-85F4-A044B3E8A24B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3869565E-372A-48BD-85F4-A044B3E8A24B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3869565E-372A-48BD-85F4-A044B3E8A24B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3869565E-372A-48BD-85F4-A044B3E8A24B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CD300722-3242-4323-87F8-367E95BB90FB} = {FAE57BD7-2E19-4A9D-8CC6-8FCE594C2AC4}
 		{15F209F1-AEF3-4499-B85A-41D91C2F1B51} = {41277ACE-1FC9-4C34-8A6E-FF5D43BCEC29}
 		{EC1D8B82-2ABE-46CD-AC7B-D45C10FB0195} = {00E9A906-6330-43A6-8D11-01AC2C2D33BA}
 		{10DF8064-3E15-4E72-A2F9-FF466E057055} = {00E9A906-6330-43A6-8D11-01AC2C2D33BA}
@@ -81,6 +80,7 @@ Global
 		{BCF7F424-8A9D-4884-9E0F-51332162A8CF} = {D846F111-DF33-42FC-B25B-9C8CE726A88D}
 		{9D7A4F2E-EF82-4CAF-8C62-9D87470F9590} = {2F8CD0BD-9F6E-4527-A7BD-042CBC7B500E}
 		{E3325191-123B-4FD2-BD80-936F1823359D} = {9D7A4F2E-EF82-4CAF-8C62-9D87470F9590}
+		{3869565E-372A-48BD-85F4-A044B3E8A24B} = {FAE57BD7-2E19-4A9D-8CC6-8FCE594C2AC4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A3A7D417-C56C-46C4-93C9-C99EB2F3C081}

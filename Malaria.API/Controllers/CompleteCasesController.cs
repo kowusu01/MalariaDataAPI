@@ -64,8 +64,5 @@ namespace MalariaDataAPI
             return await _service.GetByFileName(fileName);
         }
 
-
-
-
     }
 }

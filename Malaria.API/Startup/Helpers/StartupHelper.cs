@@ -11,6 +11,7 @@ using Services.Queries;
 using Business.QueryTasks;
 
 using DataAccess;
+using QueryServices.HealthTest;
 
 namespace API.Startup
 {
@@ -110,6 +111,8 @@ namespace API.Startup
 
             builder.Services.AddScoped<IDataAccessBadData, DataAccessBadData>();
             builder.Services.AddScoped<IDataAccessDataIssuesDetails, DataAccessDataIssuesDetails>();
+
+            builder.Services.AddScoped<IHealthTestInterface, HealthTestServicecs.HealthTestService>();
             //
         }
     }    

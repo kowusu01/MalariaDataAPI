@@ -142,14 +142,19 @@ namespace EfCoreLayer
                     .HasMaxLength(15)
                     .HasColumnName("id");
 
-                entity.Property(e => e.DateCreated)
-                    .HasColumnType("timestamp without time zone")
-                    .HasColumnName("date_created")
-                    .HasDefaultValueSql("now()");
+                entity.Property(e => e.Name)
+                    .HasMaxLength(255)
+                    .HasColumnName("name");
 
                 entity.Property(e => e.Descr)
                     .HasMaxLength(255)
                     .HasColumnName("descr");
+
+
+                entity.Property(e => e.DateCreated)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("date_created")
+                    .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.IsActive)
                     .HasMaxLength(1)

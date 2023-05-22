@@ -1,10 +1,11 @@
 ﻿using Common.ViewModels;
+using QueryServices.HealthTest;
 
 namespace Common.Services
 {
-    public abstract class AbstractHealthTestService
+    public abstract class AbstractHealthTestService: IHealthTestInterface
     {
-        public static dynamic GetBasicHeatlthTestString()
+        public dynamic GetBasicHeatlthTestString()
         {
             HealthTestMessage testData = new HealthTestMessage()
             {

@@ -11,6 +11,13 @@ namespace EfCoreLayer.Seeding
     {
         public static void SeedMalariaDBAsync(AppDbContext dbContext, string dbEnvironment, string dbEnvDescr)
         {
+
+            if (!dbContext.EnvInfos.Any())
+            {
+                var dbEnvironmentInfo  = new EnvInfo { Name="LOCAL", Descr = "Malaria Data Api Database - InMemoryDB", DateCreated = DateTime.Now, IsActive = '1' }; 
+                dbContext.EnvInfos.Add(dbEnvironmentInfo);
+            }
+
             if (!dbContext.LoadStats.Any())
             {
                 dbContext.LoadStats.AddRange(Seeding.GetDataLoadStatSeedData());
@@ -21,12 +28,10 @@ namespace EfCoreLayer.Seeding
                 dbContext.CasesReportedCompletes.AddRange(GetGoodDataSeeding());
             }
 
-
             if (!dbContext.CasesReportedBads.Any())
             {
                 dbContext.CasesReportedBads.AddRange(GetBadDataSeeding());
             }
-
 
             if (!dbContext.DataIssuesDetails.Any())
             {
@@ -36,7 +41,6 @@ namespace EfCoreLayer.Seeding
             dbContext.SaveChanges();
         }
 
-        
         private static List<Common.Models.MalariaData.LoadStat> GetDataLoadStatSeedData()
         {
             var stats = new List<LoadStat>()
@@ -146,7 +150,6 @@ namespace EfCoreLayer.Seeding
                 , new CasesReportedBad{ Id=5, LoadId=2, RecordNumber = 14, Country = "Bangladesh", Year = "2017", NumCases = "4893.0", NumDeaths = "", Region = "South-East Asia" }
             };
         }
-
 
         private static List<Common.Models.MalariaData.DataIssuesDetail> GetDataIssuesDetailsSeeding()
         {

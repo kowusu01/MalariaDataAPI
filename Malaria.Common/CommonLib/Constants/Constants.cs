@@ -65,7 +65,7 @@
         /// </summary>
         public static readonly string Cloud = "Cloud";
 
-        public static string DefaultDbInstance = "studentsdb";
+        public static string DefaultDbInstance = "malariadb_dev";
     }
 
     public class CurrentEnvironment

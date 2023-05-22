@@ -64,7 +64,7 @@ namespace API.Startup
             {
                 Version = "",
                 Title = "World Malaria Cases Api",
-                Description = "A simple API for exploring malaria cases data, data loading, and quality  issues."
+                Description = "A simple API for exploring malaria cases data, data loading, and quality  issues. \n Source: https://www.kaggle.com/datasets/imdevskp/malaria-dataset?select=reported_numbers.csv"                    
             });
         }
 

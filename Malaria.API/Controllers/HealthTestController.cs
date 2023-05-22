@@ -7,7 +7,7 @@ using Services.Queries;
 
 namespace MalariaDataAPI
 {
-    [Route("api/health-test")]
+    [Route("api/health-check")]
     [ApiController]
     [Produces("application/json")]
     public class HealthTestController : ControllerBase

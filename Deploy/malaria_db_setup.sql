@@ -9,19 +9,18 @@ CREATE DATABASE malariadb_dev;
 
 -- create and populate db objects	
 CREATE TABLE env_info(
-	id integer not null GENERATED ALWAYS AS IDENTITY primary key, 
-	name 		varchar(255),
-	descr 		varchar(255),
+	id 	integer not null GENERATED ALWAYS AS IDENTITY  primary key,
+        name   varchar(50),	
 	date_created 	timestamp default now(),
+	descr 		varchar(255),
 	is_active 	char(1) default 1 
 );
 
--- change this entry as needed
-INSERT INTO env_info(id, descr)
+INSERT INTO env_info(name, descr)
 VALUES
 (
 'LOCAL', 
-'Development environment - Postgres database running on local Docker instance'
+'DEV - Postgres database running on local Docker instance'
 );
 
 

@@ -1,0 +1,35 @@
+
+Adding filtering, sorting and ordering to efcore
+
+Approach
+ - add extension method to efcore dbcontext to apply the query actions filtering, sorting and ordering to the appropraiet collection
+ - the query actions are added to the efcore query builder but not executed
+ - all query actions are translated to sql and executed on the db side
+ - in a layered app, the class the has access the efcore is the one that can perform this task
+
+
+ Running the app
+ a) in visual studio
+ 1. inspect the file under Properties/launchSettins.json
+    - note the params provided under each profile
+ 2. select the profile you waqnt to use
+ 3. create the secrets file to hold the configuration values needed in that profile
+ 
+ b) running under docker
+ 1. build the app
+ 2. publish the app, note the folder where the publised files are located
+ 3. navigate to the publish folder under the current configuration (Debug or Release), to where the dlls are located
+ 4. create the image, e.g. build with image name malaria-api
+   - docker build -t malaria-api . 
+ 5. run the image, interactively so you can see the logs
+   - docker run -ti -e DataSourceType="InMemory" -e DBInstance="malariadb_dev" -e ASPNETCORE_ENVIRONMENT="Development" --name=api.malaria.dev  malaria-api
+
+In Visual studio debugging the default port for the api is set to 7096 (see Properties/launchSettings).
+
+In the docker compose, the docker instance port 80 is mapped to port 8081 on the host. 
+Therefore to access the api hosted in the docker, use the following:
+
+e.g.:
+  http://localhost:8081/swagger/index.html
+  curl https://localhost:8081/api/health-test/db
+

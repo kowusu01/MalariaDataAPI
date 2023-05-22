@@ -53,7 +53,7 @@ namespace API.Startup
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options
                     .UseNpgsql(connectionString)
-                    .UseSnakeCaseNamingConvention() // allows tables name like customer_order to become CustomerOrder in the model
+                    .UseSnakeCaseNamingConvention() // allows table name like customer_order to become CustomerOrder in the model
                     .EnableSensitiveDataLogging()   // use this for debugging and development ONLY!
             );
         }
@@ -64,7 +64,7 @@ namespace API.Startup
             {
                 Version = "",
                 Title = "World Malaria Cases Api",
-                Description = "A simple API for exploring malaria cases data, data loading, and quality  issues - " + builder.Configuration[CurrentEnvironment.Label]
+                Description = "A simple API for exploring malaria cases data, data loading, and quality  issues."
             });
         }
 

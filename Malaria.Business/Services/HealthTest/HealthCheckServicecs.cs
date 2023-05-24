@@ -7,13 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static QueryServices.HealthTest.HealthTestServicecs;
+using static QueryServices.HealthTest.HealthCheckServicecs;
 
 namespace QueryServices.HealthTest
 {
-    public class HealthTestServicecs
+    public class HealthCheckServicecs
     {
-        public class HealthTestService : AbstractHealthTestService
+        public class HealthTestService : AbstractHealthCheckService
         {
             readonly ILogger<HealthTestService> _logger;
             AppDbContext _dbContext;
@@ -24,7 +24,7 @@ namespace QueryServices.HealthTest
                 _dbContext = dbContext;
             }
 
-            public override HealthTestMessage GetDbTestString()
+            public override HealthCheckMessage GetDbTestString()
             {
                 string? envName = string.Empty;
 
@@ -33,7 +33,7 @@ namespace QueryServices.HealthTest
                     envName = _dbContext.EnvInfos?.First().Name;
                 }
 
-                HealthTestMessage testData = new HealthTestMessage()
+                HealthCheckMessage testData = new HealthCheckMessage()
                 {
                     Message = $"OK. {this.GetType().Name } sucessfully returned database environment { envName } from db.",
                     Timestamp = DateTime.Now.ToString()

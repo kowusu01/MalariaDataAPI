@@ -27,5 +27,7 @@ namespace Common.Models.MalariaData
 
         [DataMember(Name = "WHO Region")]
         public string? Region { get; set; }
+
+        public LoadStat Load { get; set; }
     }
 }

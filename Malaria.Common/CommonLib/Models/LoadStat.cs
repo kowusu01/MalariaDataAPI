@@ -43,5 +43,6 @@ namespace Common.Models.MalariaData
         [DataMember]
         [JsonPropertyOrder(9)]
         public string? ErrorMessage { get; set; }
+
     }
 }

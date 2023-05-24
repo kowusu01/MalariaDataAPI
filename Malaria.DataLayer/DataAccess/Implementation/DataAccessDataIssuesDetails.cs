@@ -26,7 +26,7 @@ namespace DataAccess
 
         public async Task<IEnumerable<DataIssuesDetail>> Get(DataAccessQueryParameters queryParams)
         {
-            return await _dbContext.DataIssuesDetails.FilterDataIssuesSetBy(queryParams).ToListAsync();
+            return await _dbContext.DataIssuesDetails.Include(x=>x.Load).FilterDataIssuesSetBy(queryParams).ToListAsync();
         }
 
     }

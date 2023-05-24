@@ -23,5 +23,7 @@ namespace Common.Models.MalariaData
         public string IssueType { get; set; }
         
         public string Issue { get; set; } = null!;
+
+        public LoadStat Load { get; set; }
     }
 }

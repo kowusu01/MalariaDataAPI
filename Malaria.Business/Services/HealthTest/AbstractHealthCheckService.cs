@@ -3,11 +3,11 @@ using QueryServices.HealthTest;
 
 namespace Common.Services
 {
-    public abstract class AbstractHealthTestService: IHealthTestInterface
+    public abstract class AbstractHealthCheckService: IHealthCheckInterface
     {
         public dynamic GetBasicHeatlthTestString()
         {
-            HealthTestMessage testData = new HealthTestMessage()
+            HealthCheckMessage testData = new HealthCheckMessage()
             {
                 Message = "OK. This is a basic health test, no Db access attempted.",
                 Timestamp = DateTime.Now.ToString()
@@ -15,7 +15,7 @@ namespace Common.Services
             return testData;
         }
 
-        public abstract HealthTestMessage GetDbTestString();
+        public abstract HealthCheckMessage GetDbTestString();
 
     }
 

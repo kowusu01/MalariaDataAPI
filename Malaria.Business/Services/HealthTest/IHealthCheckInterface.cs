@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace QueryServices.HealthTest
 {
-    public interface IHealthTestInterface
+    public interface IHealthCheckInterface
     {
         dynamic GetBasicHeatlthTestString();
-        HealthTestMessage GetDbTestString();
+        HealthCheckMessage GetDbTestString();
     }
 }

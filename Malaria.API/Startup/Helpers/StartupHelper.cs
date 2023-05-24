@@ -112,7 +112,7 @@ namespace API.Startup
             builder.Services.AddScoped<IDataAccessBadData, DataAccessBadData>();
             builder.Services.AddScoped<IDataAccessDataIssuesDetails, DataAccessDataIssuesDetails>();
 
-            builder.Services.AddScoped<IHealthTestInterface, HealthTestServicecs.HealthTestService>();
+            builder.Services.AddScoped<IHealthCheckInterface, HealthCheckServicecs.HealthTestService>();
             //
         }
     }    

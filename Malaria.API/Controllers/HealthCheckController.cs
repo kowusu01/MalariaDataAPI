@@ -1,21 +1,19 @@
 ﻿
 using Common.ViewModels;
-using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Mvc;
 using QueryServices.HealthTest;
-using Services.Queries;
 
 namespace MalariaDataAPI
 {
     [Route("api/health-check")]
     [ApiController]
     [Produces("application/json")]
-    public class HealthTestController : ControllerBase
+    public class HealthCheckController : ControllerBase
     {
-        private readonly ILogger<HealthTestController> _logger;
-        IHealthTestInterface _testService;
+        private readonly ILogger<HealthCheckController> _logger;
+        IHealthCheckInterface _testService;
 
-        public HealthTestController(ILogger<HealthTestController> logger, IHealthTestInterface service)
+        public HealthCheckController(ILogger<HealthCheckController> logger, IHealthCheckInterface service)
         {
             _logger = logger;
             _testService = service;
@@ -26,11 +24,11 @@ namespace MalariaDataAPI
         /// </summary>
         /// <returns></returns>
         [HttpGet("basic")]
-        public HealthTestMessage BasicTest()
+        public HealthCheckMessage BasicTest()
         {
             _logger.LogInformation($"Basic health test: {_testService.GetBasicHeatlthTestString().Message} - {_testService.GetBasicHeatlthTestString().Timestamp}");
             
-            return new HealthTestMessage { Message = _testService.GetBasicHeatlthTestString().Message,
+            return new HealthCheckMessage { Message = _testService.GetBasicHeatlthTestString().Message,
                 Timestamp = _testService.GetBasicHeatlthTestString().Timestamp
             };
         }
@@ -40,9 +38,9 @@ namespace MalariaDataAPI
         /// </summary>
         /// <returns></returns>
         [HttpGet("db")]
-        public HealthTestMessage DBTest()
+        public HealthCheckMessage DBTest()
         {
-            HealthTestMessage testMessage = _testService.GetDbTestString();
+            HealthCheckMessage testMessage = _testService.GetDbTestString();
             _logger.LogInformation(string.Format("{0} - {1}", testMessage.Message, testMessage.Timestamp));
             return testMessage;
         }

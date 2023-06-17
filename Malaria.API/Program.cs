@@ -67,6 +67,13 @@ else
 }
 
 
+app.UseCors(builder => builder
+     .AllowAnyOrigin()
+     .AllowAnyMethod()
+     .AllowAnyHeader());
+
+
+
 // seed the database if using InMemory
 StartupHelper.SeedDatabase(builder, app);
 

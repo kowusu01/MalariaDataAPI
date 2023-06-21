@@ -38,6 +38,8 @@ else
     StartupHelper.ConfigureServerDatabase(builder);
 }
 
+StartupHelper.ConfigureCORS(builder);
+
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -66,22 +68,27 @@ else
             builder.Configuration[DBConstants.DBServer], builder.Configuration[DBConstants.DBInstance], "********", "********"));
 }
 
+if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_KEY]))
+{
+    app.Logger.LogInformation($"CORS KNOWN DOMAINS: {builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_KEY]}");
+}
 
-app.UseCors(builder => builder
-     .AllowAnyOrigin()
-     .AllowAnyMethod()
-     .AllowAnyHeader());
 
-
+if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]))
+{
+    app.Logger.LogInformation($"CORS KNOWN DOMAINS: {builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]}");
+}
 
 // seed the database if using InMemory
 StartupHelper.SeedDatabase(builder, app);
+
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseCors(CorsConfig.CORS_POLICY_ALLOWS_KNOWN_ORIGINS);
 app.UseAuthorization();
 
 app.MapControllers();
@@ -89,5 +96,3 @@ app.MapControllers();
 app.Logger.LogInformation("Calling app.Run()...  " + DateTime.Now);
 
 app.Run();
-
-

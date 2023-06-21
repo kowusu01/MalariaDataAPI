@@ -17,6 +17,34 @@ namespace API.Startup
 {
     public class StartupHelper
     {
+
+        public static void ConfigureCORS(WebApplicationBuilder builder)
+        {
+            
+            string configKnownDomains = builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_KEY];
+            string configAllowedMethods = builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY];
+            if (!string.IsNullOrEmpty(configKnownDomains))
+            {
+                var knownDomains = configKnownDomains.Split(new char[] {';'});
+                var allowedMethods = configAllowedMethods.Split(new char[] { ';' });
+                var policyName = CorsConfig.CORS_POLICY_ALLOWS_KNOWN_ORIGINS;
+
+                builder.Services.AddCors(options =>
+                {
+                    options.AddPolicy(name: policyName,
+                                      builder =>
+                                      {
+                                          builder
+                                           .WithOrigins(knownDomains)
+                                           .WithMethods(allowedMethods)
+                                            //.AllowAnyMethod()
+                                            //.AllowAnyOrigin()
+                                           .AllowAnyHeader();
+
+                                      });
+                });
+            }
+        }
         /// <summary>
         /// The only parameter needed to setup InMemory database is the DB instance name, an empty database will be created at runtime 
         /// </summary>

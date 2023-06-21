@@ -1,4 +1,6 @@
-﻿namespace Common.Contants
+﻿using Microsoft.Net.Http.Headers;
+
+namespace Common.Contants
 {
     public class SecretsConstants
     {
@@ -29,6 +31,13 @@
         public static readonly string AwsAccessKeySecret = "AWS_SECRET_ACCESS_KEY";
     }
 
+    public class CorsConfig
+    {
+        public static string CORS_ALLOWED_DOMAIN_KEY = "CORS_ALLOWED_DOMAINS";
+        public static string CORS_ALLOWED_METHODS_KEY = "CORS_ALLOWED_METHODS";
+        public static string CORS_POLICY_ALLOWS_KNOWN_ORIGINS = "CORS_POLICY_ALLOWS_KNOWN_ORIGINS";
+    }
+    
     public class DBConstants
     {
         /// <summary>

@@ -3,7 +3,8 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-stage
 WORKDIR src
 copy . .
-RUN  dotnet build Malaria.API/MalariaDataApi.csproj -t:Rebuild -p:Configuration=Debug -o build
+RUN ls .
+RUN  dotnet build /src/Malaria.API/MalariaDataApi.csproj -t:Rebuild -p:Configuration=Debug -o build
 
 from build-stage AS final
 WORKDIR /app

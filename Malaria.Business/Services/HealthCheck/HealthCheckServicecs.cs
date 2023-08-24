@@ -28,14 +28,10 @@ namespace QueryServices.HealthTest
             {
                 string? envName = string.Empty;
 
-                if (_dbContext.EnvInfos != null)
-                {
-                    envName = _dbContext.EnvInfos?.First().Name;
-                }
-
                 HealthCheckMessage testData = new HealthCheckMessage()
                 {
-                    Message = $"OK. {this.GetType().Name } sucessfully returned database environment { envName } from db.",
+                    Message = $"OK. {this.GetType().Name } -  sucessfully connected to db in environment {_dbContext.EnvInfos?.First().Name}. " +
+                    $"{_dbContext.EnvInfos?.First().Descr}",
                     Timestamp = DateTime.Now.ToString()
                 };
 

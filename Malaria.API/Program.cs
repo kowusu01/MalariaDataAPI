@@ -1,7 +1,8 @@
 using API.Startup;
 using Common.Contants;
 using EfCoreLayer;
-
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,12 +72,14 @@ else
 if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_KEY]))
 {
     app.Logger.LogInformation($"CORS KNOWN DOMAINS: {builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_KEY]}");
+    app.Logger.LogInformation($"Currently allowing requests from localhost port: {builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_KEY]}");
 }
 
 
 if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]))
 {
     app.Logger.LogInformation($"CORS KNOWN DOMAINS: {builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]}");
+    app.Logger.LogInformation($"no config was found to configure cross domain requests, default: {builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]}");
 }
 
 // seed the database if using InMemory
@@ -95,4 +98,16 @@ app.MapControllers();
 
 app.Logger.LogInformation("Calling app.Run()...  " + DateTime.Now);
 
-app.Run();
+app.Start();
+
+var server = app.Services.GetService<IServer>();
+
+// get address that the server is running on 
+var serverAddress = server?.Features.Get<IServerAddressesFeature>();
+if (serverAddress != null)
+{
+    Console.WriteLine("App is listening on:");
+    serverAddress.Addresses.ToList<string>().ForEach(a => Console.WriteLine(a));
+}
+
+app.WaitForShutdown();

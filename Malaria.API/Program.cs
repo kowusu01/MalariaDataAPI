@@ -78,8 +78,7 @@ if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_K
 
 if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]))
 {
-    app.Logger.LogInformation($"CORS KNOWN DOMAINS: {builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]}");
-    app.Logger.LogInformation($"no config was found to configure cross domain requests, default: {builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]}");
+    app.Logger.LogInformation($"CORS ALLOWED_METHODS: {builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]}");
 }
 
 // seed the database if using InMemory

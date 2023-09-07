@@ -26,7 +26,9 @@ namespace DataAccess
 
         public async Task<IEnumerable<CasesReportedComplete>> Get(DataAccessQueryParameters queryParams)
         {
-            return await _dbContext.CasesReportedCompletes.Include(x=>x.Load).FilterGoodDataSetBy(queryParams).ToListAsync();
+            // return await _dbContext.CasesReportedCompletes.Include(x=>x.Load).FilterGoodDataSetBy(queryParams).ToListAsync();
+            return await _dbContext.CasesReportedCompletes.FilterGoodDataSetBy(queryParams).ToListAsync();
+
         }
 
     }

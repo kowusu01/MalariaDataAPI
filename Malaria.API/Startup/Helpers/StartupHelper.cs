@@ -12,6 +12,7 @@ using Business.QueryTasks;
 
 using DataAccess;
 using QueryServices.HealthTest;
+using Common.Models.MalariaData;
 
 namespace API.Startup
 {
@@ -51,8 +52,7 @@ namespace API.Startup
         /// <param name="builder"></param>
         public static void ConfigureInMemoryData(WebApplicationBuilder builder)
         {
-            string dbInstance = builder.Configuration[DBConstants.DBInstance] == null?
-                DBSourceValues.DefaultDbInstance : builder.Configuration[DBConstants.DBInstance];
+            string dbInstance = builder.Configuration[DBConstants.DBInstance] ?? DBSourceValues.DefaultDbInstance;
            
             builder.Services.AddDbContext<AppDbContext>(options =>
             options
@@ -84,9 +84,10 @@ namespace API.Startup
                     .UseSnakeCaseNamingConvention() // allows table name like customer_order to become CustomerOrder in the model
                     .EnableSensitiveDataLogging()   // use this for debugging and development ONLY!
             );
+
         }
 
-        public static void SetUpOpenApiInfo(WebApplicationBuilder builder, Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions options)
+        public static void SetUpOpenApiInfo(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions options)
         {
             options.SwaggerDoc("v1", new OpenApiInfo
             {
@@ -96,20 +97,44 @@ namespace API.Startup
             });
         }
 
+
+        public static void EnsureDbCreated(WebApplicationBuilder builder, WebApplication app)
+        {
+            using var scope = app.Services.CreateScope();
+            app.Logger.LogInformation("Creating db..." + DateTime.Now);
+            var services = scope.ServiceProvider;
+
+            // retrieve the dbcontext object from the DI
+            var dbContext = services.GetRequiredService<AppDbContext>();
+            dbContext.Database.EnsureCreated();
+
+            if (!dbContext.EnvInfos.Any())
+            {
+                var dbEnvironmentInfo = new EnvInfo
+                {
+                    Name = builder.Configuration[EnvironmentConstants.Name],
+                    Descr = builder.Configuration[EnvironmentConstants.Descr],
+                    DateCreated = DateTime.Now,
+                    IsActive = '1'
+                };
+                dbContext.EnvInfos.Add(dbEnvironmentInfo);
+                dbContext.SaveChanges();
+            }
+            app.Logger.LogInformation("Done creating database.  - " + DateTime.Now);
+        }
+
         public static void SeedDatabase(WebApplicationBuilder builder, WebApplication app)
         {
             if (builder.Configuration[DBConstants.DBSource] == DBSourceValues.InMemory)
             {
-                using (var scope = app.Services.CreateScope())
-                {
-                    app.Logger.LogInformation("Seeding InMemory database..." + DateTime.Now);
-                    var services = scope.ServiceProvider;
+                using IServiceScope scope = app.Services.CreateScope();
+                app.Logger.LogInformation("Seeding InMemory database..." + DateTime.Now);
+                var services = scope.ServiceProvider;
 
-                    // retrieve the dbconext object from the DI
-                    var dbContext = services.GetRequiredService<AppDbContext>();
-                    Seeding.SeedMalariaDBAsync(dbContext, "DOTNET_CORE_INMEMORY_DB", "Simple, fast, reliable in-memory database for quick prototyping.");
-                    app.Logger.LogInformation("Done seeding InMemory database.  - " + DateTime.Now);
-                }
+                // retrieve the dbcontext object from the DI
+                var dbContext = services.GetRequiredService<AppDbContext>();
+                Seeding.SeedMalariaDBAsync(dbContext, "DOTNET_CORE_INMEMORY_DB", "Simple, fast, reliable in-memory database for quick prototyping.");
+                app.Logger.LogInformation("Done seeding InMemory database.  - " + DateTime.Now);
             }
         }
 

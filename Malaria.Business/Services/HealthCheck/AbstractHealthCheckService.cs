@@ -9,7 +9,7 @@ namespace Common.Services
         {
             HealthCheckMessage testData = new HealthCheckMessage()
             {
-                Message = "OK. This is a basic health test, no Db access attempted.",
+                Message = $"OK. {this.GetType().Name} - This is a basic health test, no Db access attempted.",
                 Timestamp = DateTime.Now.ToString()
             };
             return testData;

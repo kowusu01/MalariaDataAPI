@@ -47,10 +47,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSwaggerGen(options => StartupHelper.SetUpOpenApiInfo(builder, options));
-
+builder.Services.AddSwaggerGen(options => StartupHelper.SetUpOpenApiInfo(options));
 
 var app = builder.Build();
+StartupHelper.EnsureDbCreated(builder, app);
+
 
 if (!dataSourceTypeSpecified)
 {
@@ -99,9 +100,9 @@ app.Logger.LogInformation("Calling app.Run()...  " + DateTime.Now);
 
 app.Start();
 
-var server = app.Services.GetService<IServer>();
 
 // get address that the server is running on 
+var server = app.Services.GetService<IServer>();
 var serverAddress = server?.Features.Get<IServerAddressesFeature>();
 if (serverAddress != null)
 {

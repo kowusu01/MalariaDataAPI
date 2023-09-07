@@ -77,9 +77,12 @@ namespace Common.Contants
         public static string DefaultDbInstance = "malariadb_dev";
     }
 
-    public class CurrentEnvironment
+    public class EnvironmentConstants
     {
         public static readonly string Label = "CurrentEnvironmentLabel";
+        public static readonly string Name = "EnvName";
+        public static readonly string Descr = "EnvDescr";
+
     }
 
     public enum FilterByColumnEnum

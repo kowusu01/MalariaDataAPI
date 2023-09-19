@@ -98,7 +98,14 @@ namespace Common.Contants
         NumRecords,
         BadDataCount,
         WarningDataCount,
-        IssueType
+        IssueType,
+
+        CountryName,
+        ISO2,
+        ISO3,
+        ISONum,
+        RegionName,
+        RegionCode
     };
 
     public enum OrderByColumnEnum
@@ -123,5 +130,9 @@ namespace Common.Contants
         asc
     }
 
-
+    public class ListPagination
+    {
+       public int Page { get; set; }
+       public int PageSize { get; set; }
+    }
 }

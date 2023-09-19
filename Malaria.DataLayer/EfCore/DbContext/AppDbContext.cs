@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Common.Models.MalariaData;
+using Common.Models;
 
 namespace EfCoreLayer
 {
@@ -22,6 +23,8 @@ namespace EfCoreLayer
         public virtual DbSet<DataIssuesDetail> DataIssuesDetails { get; set; } = null!;
         public virtual DbSet<EnvInfo> EnvInfos { get; set; } = null!;
         public virtual DbSet<LoadStat> LoadStats { get; set; } = null!;
+        public virtual DbSet<Country> Countries { get; set; } = null!;
+        public virtual DbSet<WHORegion> WHORegions { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

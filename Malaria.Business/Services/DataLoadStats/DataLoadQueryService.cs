@@ -2,17 +2,14 @@
 
 using Microsoft.Extensions.Logging;
 
-using Common.Models.MalariaData;
 using Common.Contants;
 using Common.DataAccessParameters;
-
-using Business.QueryTasks;
-using Common.ViewModels;
+using BusinessQueries.TaskRunners.DataLoads;
 
 namespace Services.Queries
 {
 
-    public interface IDataLoadQueryService : IGenericServiceInterface
+    public interface IDataLoadQueryService : IGenericServiceInterface, IDataLoadServiceInterface
     {
     }
 
@@ -33,7 +30,7 @@ namespace Services.Queries
             _taskRunner = runnerObj;
         }
 
-        public async Task<dynamic> GetData()
+        public async Task<dynamic> List(int? page, int? pageSize, int defaultPageSize=10)
         {
             // select a runner 
             // convert params to querypParams

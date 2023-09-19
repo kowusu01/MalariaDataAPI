@@ -12,8 +12,8 @@ using Services.Queries;
 using DataAccess;
 using QueryServices.HealthTest;
 using Common.Models.MalariaData;
-using BusinessQueries.TaskRunners.DataLoads;
-using BusinessQueries.Tasks.DataLoads;
+using BusinessQueries.TaskRunners.WorldInfo;
+using BusinessQueries.Tasks.WorldInfo;
 
 namespace API.Startup
 {
@@ -79,7 +79,7 @@ namespace API.Startup
                 builder.Configuration[DBConstants.DBInstance], builder.Configuration[DBConstants.DBUser], builder.Configuration[DBConstants.DBPassword]);
 
             // configure the db context
-            builder.Services.AddDbContext<AppDbContext>(options =>
+            builder.Services.AddDbContext<WorlInfoApiDbContext>(options =>
                 options
                     .UseNpgsql(connectionString)
                     .UseSnakeCaseNamingConvention() // allows table name like customer_order to become CustomerOrder in the model
@@ -93,82 +93,42 @@ namespace API.Startup
             options.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "",
-                Title = "World Malaria Cases Api",
-                Description = "A simple API for exploring malaria cases data, data loading, and quality  issues. \n Source: https://www.kaggle.com/datasets/imdevskp/malaria-dataset?select=reported_numbers.csv"                    
+                Title = "World Facts Api",
+                Description = "A simple API for serving world countries, and information related to World Health Organization Malaria data."
             });
         }
 
-
-        public static void EnsureDbCreated(WebApplicationBuilder builder, WebApplication app)
+        public static void SeedDatabase(WebApplicationBuilder builder, WebApplication app)
         {
-            using var scope = app.Services.CreateScope();
-            app.Logger.LogInformation("Creating db..." + DateTime.Now);
+            using IServiceScope scope = app.Services.CreateScope();
+            app.Logger.LogInformation("Seeding database..." + DateTime.Now);
             var services = scope.ServiceProvider;
 
             // retrieve the dbcontext object from the DI
             var dbContext = services.GetRequiredService<AppDbContext>();
             dbContext.Database.EnsureCreated();
 
-            if (!dbContext.EnvInfos.Any())
-            {
-                var dbEnvironmentInfo = new EnvInfo
-                {
-                    Name = builder.Configuration[EnvironmentConstants.Name],
-                    Descr = builder.Configuration[EnvironmentConstants.Descr],
-                    DateCreated = DateTime.Now,
-                    IsActive = '1'
-                };
-                dbContext.EnvInfos.Add(dbEnvironmentInfo);
-                dbContext.SaveChanges();
-            }
-            app.Logger.LogInformation("Done creating database.  - " + DateTime.Now);
-        }
-
-        public static void SeedDatabase(WebApplicationBuilder builder, WebApplication app)
-        {
-            if (builder.Configuration[DBConstants.DBSource] == DBSourceValues.InMemory)
-            {
-                using IServiceScope scope = app.Services.CreateScope();
-                app.Logger.LogInformation("Seeding InMemory database..." + DateTime.Now);
-                var services = scope.ServiceProvider;
-
-                // retrieve the dbcontext object from the DI
-                var dbContext = services.GetRequiredService<AppDbContext>();
-                Seeding.SeedMalariaDBAsync(dbContext, "DOTNET_CORE_INMEMORY_DB", "Simple, fast, reliable in-memory database for quick prototyping.");
-                app.Logger.LogInformation("Done seeding InMemory database.  - " + DateTime.Now);
-
-            }
+            Seeding.CreateCountryListAsync(dbContext, builder.Configuration[EnvironmentConstants.Name], builder.Configuration[EnvironmentConstants.Descr]);
+            app.Logger.LogInformation("Done seeding InMemory database.  - " + DateTime.Now);
         }
 
         public static void BindServices(WebApplicationBuilder builder)
         {
             // services
-            builder.Services.AddScoped<IDataLoadQueryService, DataLoadQueryService>();
-            builder.Services.AddScoped<ICompleteDataQueryService, CompleteDataQueryService>();
-            builder.Services.AddScoped<IBadDataQueryService, BadDataQueryService>();
-            builder.Services.AddScoped<IDataIssuesDetailsQueryService, DataIssuesDetailsQueryService>();
-
+            builder.Services.AddScoped<ICountriesQueryService, CountriesQueryService>();
+            
             // task runners
-            builder.Services.AddScoped<IDataLoadQueryTaskRunner, DataLoadQueryTaskRunner>();
-            builder.Services.AddScoped<ICompleteDataQueryTaskRunner, CompleteDataQueryTaskRunner>();
-            builder.Services.AddScoped<IBadDataQueryTaskRunner, BadDataQueryTaskRunner>();
-            builder.Services.AddScoped<IDataIssuesDetailsQueryTaskRunner, DataIssuesDetailsQueryTaskRunner>();
+            builder.Services.AddScoped<ICountriesQueryTaskRunner, CountriesQueryTaskRunner>();
             
             // tasks
-            builder.Services.AddScoped<IDataLoadQueryTask, DataLoadQueryTask>();
-            builder.Services.AddScoped<ICompleteDataQueryTask, CompleteDataQueryTask>();
-            builder.Services.AddScoped<IBadDataQueryTask, BadDataQueryTask>();
-            builder.Services.AddScoped<IDataIssuesDetailsQueryTask, DataIssuesDetailsQueryTask>();
-
+            builder.Services.AddScoped<ICountriesQueryTask, CountriesQueryTask>();
+            
             // data access
-            builder.Services.AddScoped<IDataAccessLoadStats, DataAccessLoadStats>();
-            builder.Services.AddScoped<IDataAccessGoodData, DataAccessCompleteData>();
+            builder.Services.AddScoped<IDataAccessCountries, DataAccessCountries>();
 
-            builder.Services.AddScoped<IDataAccessBadData, DataAccessBadData>();
-            builder.Services.AddScoped<IDataAccessDataIssuesDetails, DataAccessDataIssuesDetails>();
-
+            // healthcheck
             builder.Services.AddScoped<IHealthCheckInterface, HealthCheckServicecs.HealthTestService>();
-            //
+            
         }
     }    
 }

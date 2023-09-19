@@ -6,7 +6,7 @@ namespace Services.Queries
 {
     public partial class ServicesHelper
     {
-        public static dynamic MapListDataToViewModel(IEnumerable<dynamic> data)
+        public static dynamic MapListDataToViewModel(IEnumerable<dynamic> data, int page=1, int pageSize=1000)
         {
             return new ApiResultListViewModel()
             {
@@ -14,8 +14,8 @@ namespace Services.Queries
                 {
                     Location = "api/dataload/",
                     TotalRecords = data.Count(),
-                    Page = 1,
-                    PageSize = 1
+                    Page = page,
+                    PageSize = pageSize
                 },
                 data = data
             };

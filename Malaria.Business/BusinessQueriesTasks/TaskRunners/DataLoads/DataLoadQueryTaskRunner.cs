@@ -1,12 +1,14 @@
-﻿using Common.DataAccessParameters;
+﻿using Business.QueryTaskRunners;
+using BusinessQueries.Tasks.DataLoads;
+using Common.DataAccessParameters;
 using Common.Models.MalariaData;
 
 
 
-namespace Business.QueryTasks
+namespace BusinessQueries.TaskRunners.DataLoads
 {
 
-    public interface IDataLoadQueryTaskRunner
+    public interface IDataLoadQueryTaskRunner : IBaseQueryInterface
     {
         Task<IEnumerable<LoadStat>> RunTasks(DataAccessQueryParameters queryParams);
     }
@@ -20,6 +22,8 @@ namespace Business.QueryTasks
         // task to run
         private readonly IDataLoadQueryTask _dataLoadQueryTask;
 
+        public int MaxPageSize { get; set; }
+
         // the runner has a reference to the EfCoreContext for commit and trxn purposes
         //private readonly EfCoreLayer.AppDbContext _appDbContext;
 
@@ -31,7 +35,7 @@ namespace Business.QueryTasks
 
         public async Task<IEnumerable<LoadStat>> RunTasks(DataAccessQueryParameters queryParams)
         {
-             return await _dataLoadQueryTask.ExecuteTask(queryParams);
+            return await _dataLoadQueryTask.ExecuteTask(queryParams);
         }
 
     }

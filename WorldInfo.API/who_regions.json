@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "Africa",
+    "Code": "AFR",
+    "Descr": "African Region"
+  },
+  {
+    "Name": "Americas",
+    "Code": "AMR",
+    "Descr": "Region of the Americas"
+  },
+  {
+    "Name": "Europe",
+    "Code": "EUR",
+    "Descr": "European Region"
+  },
+  {
+    "Name": "South-East Asia",
+    "Descr": "South-East Asia Region",
+    "Code": "SEAR"
+  },
+  {
+    "Name": "Eastern Mediterranean",
+    "Code": "EMR",
+    "Descr": "Eastern Mediterranean Region"
+  },
+  {
+    "Name": "Western Pacific",
+    "Code": "WPR",
+    "Descr": "Western Pacific Region"
+  }
+]

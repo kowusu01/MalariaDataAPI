@@ -1,14 +1,17 @@
-﻿using Common.DataAccessParameters;
+﻿using Business.QueryTaskRunners;
+using BusinessQueries.Tasks.DataLoads;
+using Common.DataAccessParameters;
 using Common.Models.MalariaData;
 
 
 
-namespace Business.QueryTasks
+namespace BusinessQueries.TaskRunners.DataLoads
 {
 
-    public interface IBadDataQueryTaskRunner
+    public interface IBadDataQueryTaskRunner : IBaseQueryInterface
     {
         Task<IEnumerable<CasesReportedBad>> RunTasks(DataAccessQueryParameters queryParams);
+
     }
 
     public class BadDataQueryTaskRunner : AbstractBusinessTaskErrors, IBadDataQueryTaskRunner
@@ -16,6 +19,7 @@ namespace Business.QueryTasks
         // task to run
         private readonly IBadDataQueryTask _badDataQueryTask;
 
+        public int MaxPageSize { get; set; } 
         // the runner has a reference to the EfCoreContext for commit and trxn purposes
         //private readonly EfCoreLayer.AppDbContext _appDbContext;
 
@@ -29,6 +33,8 @@ namespace Business.QueryTasks
         {
             return await _badDataQueryTask.ExecuteTask(queryParams);
         }
+
+
 
     }
 }

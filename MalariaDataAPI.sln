@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{5B83
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MalariaDataAPI", "Malaria.API\MalariaDataAPI.csproj", "{3869565E-372A-48BD-85F4-A044B3E8A24B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldInfo.API", "WorldInfo.API\WorldInfo.API.csproj", "{0FF64CAA-2FEB-46A0-86E0-FAD9844E2258}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{3869565E-372A-48BD-85F4-A044B3E8A24B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3869565E-372A-48BD-85F4-A044B3E8A24B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3869565E-372A-48BD-85F4-A044B3E8A24B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FF64CAA-2FEB-46A0-86E0-FAD9844E2258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF64CAA-2FEB-46A0-86E0-FAD9844E2258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF64CAA-2FEB-46A0-86E0-FAD9844E2258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF64CAA-2FEB-46A0-86E0-FAD9844E2258}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

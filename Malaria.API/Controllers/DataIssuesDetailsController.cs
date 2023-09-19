@@ -22,15 +22,13 @@ namespace MalariaDataAPI
             _service = service;
         }
 
-        /// <summary>
-        /// returns paginated list
-        /// </summary>
-        /// <returns></returns>
-
         [HttpGet("list")]
-        public async Task<ActionResult<dynamic>> List()
+        public async Task<ActionResult<dynamic>> List(
+            [FromQuery(Name = "page")] int? page,
+            [FromQuery(Name = "pageSize")] int? pageSize
+            )
         {
-            return await _service.GetData();
+            return await _service.List(page, pageSize);
         }
 
         [HttpGet("{id}")]
@@ -38,7 +36,6 @@ namespace MalariaDataAPI
         {
             return await _service.GetById(id);
         }
-
 
         [HttpGet("load_id/{load_id}")]
         public async Task<ActionResult<dynamic>> GetByLoadId(int load_id)

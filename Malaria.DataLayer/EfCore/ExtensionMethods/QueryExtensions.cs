@@ -5,7 +5,7 @@ using Common.DataAccessParameters;
 
 namespace EfCoreLayer.ExtensionMethods
 {
-    public static class QueryExtensions
+    public static partial class QueryExtensions
     {
         public static IQueryable<LoadStat>  FilterDataLoadStatsSetBy(this IQueryable<LoadStat> efCoreData, DataAccessQueryParameters queryParameters)
         {

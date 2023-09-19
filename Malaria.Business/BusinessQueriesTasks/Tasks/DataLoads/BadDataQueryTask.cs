@@ -3,7 +3,7 @@ using Common.Models.MalariaData;
 using DataAccess;
 
 
-namespace Business.QueryTasks
+namespace BusinessQueries.Tasks.DataLoads
 {
     public interface IBadDataQueryTask
     {

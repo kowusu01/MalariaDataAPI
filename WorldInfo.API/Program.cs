@@ -1,8 +1,11 @@
-using API.Startup;
 using Common.Contants;
-using EfCoreLayer;
-using Microsoft.AspNetCore.Hosting.Server;
+using API.Startup;
+using Services.Queries;
+using WorldInfo.API.RequestHandlers;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,7 +53,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(options => StartupHelper.SetUpOpenApiInfo(options));
 
 var app = builder.Build();
-StartupHelper.EnsureDbCreated(builder, app);
 
 
 if (!dataSourceTypeSpecified)
@@ -59,7 +61,7 @@ if (!dataSourceTypeSpecified)
 }
 
 if (dataSourceType == DBSourceValues.InMemory)
-{ 
+{
     app.Logger.LogInformation(string.Format("Using {0} Db instance: {1}  - {2}", builder.Configuration[DBConstants.DBSource],
            builder.Configuration[DBConstants.DBInstance], DateTime.Now));
 }
@@ -94,10 +96,24 @@ app.UseHttpsRedirection();
 app.UseCors(CorsConfig.CORS_POLICY_ALLOWS_KNOWN_ORIGINS);
 app.UseAuthorization();
 
-app.MapControllers();
+
+/////////////////////////////////////////////////////////////
+using IServiceScope scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+var countriesQueryService = services.GetRequiredService<ICountriesQueryService>();
+CountriesRequestHandlers handlers = new CountriesRequestHandlers(
+    app.Logger, 
+    countriesQueryService, 
+    Convert.ToInt32(builder.Configuration["DefaultPageSize"])
+    );
+
+app.MapGet("api/countries/list", handlers.List);
+app.MapGet("api/countries/{id:int}", handlers.GetById);
+
+app.MapGet("api/countries/", handlers.GetCountriesBy);
 
 app.Logger.LogInformation("Calling app.Start()...  " + DateTime.Now);
-
 app.Start();
 
 
@@ -111,3 +127,6 @@ if (serverAddress != null)
 }
 
 app.WaitForShutdown();
+
+
+

@@ -2,17 +2,14 @@
 
 using Microsoft.Extensions.Logging;
 
-using Common.Models.MalariaData;
 using Common.Contants;
 using Common.DataAccessParameters;
-
-using Business.QueryTasks;
-using Common.ViewModels;
+using BusinessQueries.TaskRunners.DataLoads;
 
 namespace Services.Queries
 {
 
-    public interface ICompleteDataQueryService : IGenericServiceInterface
+    public interface ICompleteDataQueryService : IGenericServiceInterface, IDataLoadServiceInterface
     {
     }
 
@@ -33,7 +30,7 @@ namespace Services.Queries
             _taskRunner = runnerObj;
         }
         
-        public async Task<dynamic> GetData()
+        public async Task<dynamic> List(int? page, int? pageSize, int defaultPageSize = 10)
         {
             // select a runner 
             // convert params to querypParams
@@ -46,7 +43,7 @@ namespace Services.Queries
         public async Task<dynamic> GetById(int id)
         {
             var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.Id, FilterByColumnValue = id.ToString() });
-            return ServicesHelper.MapListDataToViewModel(data);
+            return ServicesHelper.MapDataToViewModel(data);
         }
         public async Task<dynamic> GetByLoadId(int loadId)
         {
@@ -56,7 +53,7 @@ namespace Services.Queries
         public async Task<dynamic> GetByRecordNumber(int recordNumber)
         {
             var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.RecordNumber, FilterByColumnValue = recordNumber.ToString() });
-            return ServicesHelper.MapListDataToViewModel(data);
+            return ServicesHelper.MapDataToViewModel(data);
         }
         public async Task<dynamic> GetByLoadDate(DateTime loadDate)
         {

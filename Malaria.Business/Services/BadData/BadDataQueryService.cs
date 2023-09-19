@@ -5,15 +5,14 @@ using Microsoft.Extensions.Logging;
 using Common.Models.MalariaData;
 using Common.Contants;
 using Common.DataAccessParameters;
-
-using Business.QueryTasks;
 using Common.ViewModels;
+using BusinessQueries.TaskRunners.DataLoads;
 
 namespace Services.Queries
 {
-   
-    
-    public interface IBadDataQueryService : IGenericServiceInterface
+
+
+    public interface IBadDataQueryService : IGenericServiceInterface, IDataLoadServiceInterface
     {
         // mainly for dependency injection
         // and also for adding additional methods
@@ -36,7 +35,7 @@ namespace Services.Queries
             _taskRunner = runnerObj;
         }
 
-        public async Task<dynamic> GetData()
+        public async Task<dynamic> List(int? page, int? pageSize, int defaultPageSize = 10)
         {
             // select a runner 
             // convert params to querypParams
@@ -49,27 +48,27 @@ namespace Services.Queries
         public async Task<dynamic> GetById(int id)
         {
             var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.Id, FilterByColumnValue = id.ToString() });
-            return ServicesHelper.MapListDataToViewModel(data);
+            return ServicesHelper.MapDataToViewModel(data);
         }
         public async Task<dynamic> GetByLoadId(int loadId)
         {
             var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.LoadId, FilterByColumnValue = loadId.ToString() });
-            return ServicesHelper.MapListDataToViewModel(data);
+            return ServicesHelper.MapDataToViewModel(data);
         }
         public async Task<dynamic> GetByRecordNumber(int recordNumber)
         {
             var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.RecordNumber, FilterByColumnValue = recordNumber.ToString() });
-            return ServicesHelper.MapListDataToViewModel(data);
+            return ServicesHelper.MapDataToViewModel(data);
         }
         public async Task<dynamic> GetByLoadDate(DateTime loadDate)
         {
             var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.LoadTimestamp, FilterByColumnValue = loadDate.ToString() });
-            return ServicesHelper.MapListDataToViewModel(data);
+            return ServicesHelper.MapDataToViewModel(data);
         }
         public async Task<dynamic> GetByFileName(string fileName)
         {
             var data = await _taskRunner.RunTasks(new DataAccessQueryParameters() { FilterByColumn = FilterByColumnEnum.FilePath, FilterByColumnValue = fileName });
-            return ServicesHelper.MapListDataToViewModel(data);
+            return ServicesHelper.MapDataToViewModel(data);
         }
     }
 }

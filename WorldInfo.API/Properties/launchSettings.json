@@ -1,0 +1,77 @@
+{
+  "profiles": {
+    "WorldInfo.API": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7279;http://localhost:5279"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "useSSL": true
+    },
+    "InMemoryDb": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CurrentEnvironmentLabel": "(DEV)",
+        "DataSourceType": "InMemory"
+
+      },
+      "applicationUrl": "https://localhost:7279;http://localhost:5279",
+      "dotnetRunMessages": true
+    },
+    "LocalPostgres": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CurrentEnvironmentLabel": "Using local Postgres",
+        "DataSourceType": "Server"
+
+      },
+      "applicationUrl": "https://localhost:7279;http://localhost:5279",
+      "dotnetRunMessages": true
+    },
+    "CloudDb": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CurrentEnvironmentLabel": " Using cloud hosted Postgres",
+        "DataSourceType": "cloud"
+
+      },
+      "applicationUrl": "https://localhost:7279;http://localhost:5279",
+      "dotnetRunMessages": true
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:61130",
+      "sslPort": 44392
+    }
+  }
+}

@@ -4,6 +4,11 @@ namespace Common.DataAccessParameters
 {
     public class DataAccessQueryParameters
     {
+        public DataAccessQueryParameters()
+        {
+            PaginationInfo.Page = 1;
+            PaginationInfo.PageSize = 1000;
+        }
         public OrderByColumnEnum OrderByColumn { get; set; }
         public string? OrderByColumnValue { get; set; }
 
@@ -11,6 +16,11 @@ namespace Common.DataAccessParameters
         public string? FilterByColumnValue { get; set; }
 
         public OrderBySchemeEnum OrderByScheme{ get;set; }
+
+        ListPagination _pagination = new ListPagination();
+
+        public ListPagination PaginationInfo {
+            get { return _pagination; } set { _pagination = value; } }
     }
     
 

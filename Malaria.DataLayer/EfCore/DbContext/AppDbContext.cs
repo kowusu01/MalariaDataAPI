@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Common.Models.MalariaData;
 using Common.Models;
 
-namespace EfCoreLayer
+namespace EfCoreLayer.MalariaData
 {
     public partial class AppDbContext : DbContext
     {
@@ -18,13 +18,14 @@ namespace EfCoreLayer
         {
         }
 
-        public virtual DbSet<CasesReportedBad> CasesReportedBads { get; set; } = null!;
-        public virtual DbSet<CasesReportedComplete> CasesReportedCompletes { get; set; } = null!;
-        public virtual DbSet<DataIssuesDetail> DataIssuesDetails { get; set; } = null!;
         public virtual DbSet<EnvInfo> EnvInfos { get; set; } = null!;
+
         public virtual DbSet<LoadStat> LoadStats { get; set; } = null!;
-        public virtual DbSet<Country> Countries { get; set; } = null!;
-        public virtual DbSet<WHORegion> WHORegions { get; set; } = null!;
+        public virtual DbSet<CasesReportedComplete> CasesReportedCompletes { get; set; } = null!;
+        public virtual DbSet<CasesReportedBad> CasesReportedBads { get; set; } = null!;
+        public virtual DbSet<DataIssuesDetail> DataIssuesDetails { get; set; } = null!;
+
+               
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

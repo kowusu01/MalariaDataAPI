@@ -2,9 +2,8 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using EfCoreLayer;
+using EfCoreLayer.WorldInfo;
 using Common.DataAccessParameters;
-using Common.Models.MalariaData;
 using EfCoreLayer.ExtensionMethods;
 using Common.Models;
 
@@ -18,9 +17,9 @@ namespace DataAccess
 
     public class DataAccessCountries : IDataAccessCountries
     {
-        private readonly AppDbContext _dbContext;
+        private readonly WorlInfoApiDbContext _dbContext;
 
-        public DataAccessCountries(AppDbContext dbContext)
+        public DataAccessCountries(WorlInfoApiDbContext dbContext)
         {
             _dbContext = dbContext;
         }

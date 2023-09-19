@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Common.Models;
+using Common.Models.MalariaData;
 
-namespace EfCoreLayer
+namespace EfCoreLayer.WorldInfo
 {
     public partial class WorlInfoApiDbContext : DbContext
     {
@@ -13,7 +14,7 @@ namespace EfCoreLayer
             : base(options)
         {
         }
-        
+        public virtual DbSet<EnvInfo> EnvInfos { get; set; } = null!;
         public virtual DbSet<Country> Countries { get; set; } = null!;
         public virtual DbSet<WHORegion> WHORegions { get; set; } = null!;
 

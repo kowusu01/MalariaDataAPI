@@ -1,14 +1,10 @@
 ﻿using Common.Services;
 using Common.ViewModels;
-using EfCoreLayer;
-using Microsoft.EntityFrameworkCore.InMemory.Design.Internal;
+using EfCoreLayer.MalariaData;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static QueryServices.HealthTest.HealthCheckServicecs;
+
+
+//using static QueryServices.HealthTest.HealthCheckServicecs;
 
 namespace QueryServices.HealthTest
 {

@@ -3,10 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 using Common.Contants;
-using Common.Services;
 using EfCoreLayer.Seeding;
 
-using EfCoreLayer;
+using EfCoreLayer.MalariaData;
 using Services.Queries;
 
 using DataAccess;

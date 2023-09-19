@@ -3,17 +3,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 using Common.Contants;
-using Common.Services;
 using EfCoreLayer.Seeding;
 
-using EfCoreLayer;
+using EfCoreLayer.WorldInfo;
 using Services.Queries;
 
 using DataAccess;
 using QueryServices.HealthTest;
-using Common.Models.MalariaData;
 using BusinessQueries.TaskRunners.WorldInfo;
 using BusinessQueries.Tasks.WorldInfo;
+
 
 namespace API.Startup
 {
@@ -55,7 +54,7 @@ namespace API.Startup
         {
             string dbInstance = builder.Configuration[DBConstants.DBInstance] ?? DBSourceValues.DefaultDbInstance;
            
-            builder.Services.AddDbContext<AppDbContext>(options =>
+            builder.Services.AddDbContext<WorlInfoApiDbContext>(options =>
             options
              .UseInMemoryDatabase(dbInstance) // all we need is db instance name
              .EnableSensitiveDataLogging()  // for debugging and development ONLY!
@@ -105,7 +104,7 @@ namespace API.Startup
             var services = scope.ServiceProvider;
 
             // retrieve the dbcontext object from the DI
-            var dbContext = services.GetRequiredService<AppDbContext>();
+            var dbContext = services.GetRequiredService<WorlInfoApiDbContext>();
             dbContext.Database.EnsureCreated();
 
             Seeding.CreateCountryListAsync(dbContext, builder.Configuration[EnvironmentConstants.Name], builder.Configuration[EnvironmentConstants.Descr]);

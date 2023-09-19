@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using EfCoreLayer;
+using EfCoreLayer.MalariaData;
 using Common.DataAccessParameters;
 using Common.Models.MalariaData;
 using EfCoreLayer.ExtensionMethods;

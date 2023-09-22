@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Common.Models.MalariaData
+﻿
+namespace Common.Models
 {
     public partial class EnvInfo
     {

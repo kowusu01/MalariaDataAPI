@@ -1,13 +1,13 @@
 ﻿using BusinessQueries.Tasks.DataLoads;
-using Common.DataAccessParameters;
-using Common.Models;
+using Common.QueryParameters;
+using Common.Models.WorldInfo;
 using DataAccess;
 
 namespace BusinessQueries.Tasks.WorldInfo
 {
     public interface ICountriesQueryTask
     {
-        Task<IEnumerable<Country>> ExecuteTask(DataAccessQueryParameters queryParams);
+        Task<IEnumerable<Country>> ExecuteTask(QueryParameters queryParams);
     }
 
     public class CountriesQueryTask : AbstractBusinessTaskErrors, ICountriesQueryTask
@@ -19,7 +19,7 @@ namespace BusinessQueries.Tasks.WorldInfo
             _dataAccess = dataAccess;
         }
 
-        public async Task<IEnumerable<Country>> ExecuteTask(DataAccessQueryParameters queryParams)
+        public async Task<IEnumerable<Country>> ExecuteTask(QueryParameters queryParams)
         {
             return await _dataAccess.Get(queryParams);
         }

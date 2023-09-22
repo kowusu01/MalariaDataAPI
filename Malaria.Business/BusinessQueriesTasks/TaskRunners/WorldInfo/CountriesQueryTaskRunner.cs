@@ -1,8 +1,9 @@
 ﻿using Business.QueryTaskRunners;
 using BusinessQueries.Tasks.DataLoads;
 using BusinessQueries.Tasks.WorldInfo;
-using Common.DataAccessParameters;
-using Common.Models;
+using Common.QueryParameters;
+
+using Common.Models.WorldInfo;
 
 
 namespace BusinessQueries.TaskRunners.WorldInfo
@@ -10,7 +11,7 @@ namespace BusinessQueries.TaskRunners.WorldInfo
 
     public interface ICountriesQueryTaskRunner : IBaseQueryInterface
     {
-        Task<IEnumerable<Country>> RunTasks(DataAccessQueryParameters queryParams);
+        Task<IEnumerable<Country>> RunTasks(QueryParameters queryParams);
     }
 
     /// <summary>
@@ -34,7 +35,7 @@ namespace BusinessQueries.TaskRunners.WorldInfo
             //_appDbContext = appDbContext;
         }
 
-        public async Task<IEnumerable<Country>> RunTasks(DataAccessQueryParameters queryParams)
+        public async Task<IEnumerable<Country>> RunTasks(QueryParameters queryParams)
         {
             return await _countriesQueryTask.ExecuteTask(queryParams);
         }

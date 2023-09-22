@@ -11,7 +11,6 @@
   <ItemGroup>
     <PackageReference Include="Amazon.Extensions.Configuration.SystemsManager" Version="4.0.0" />
     <PackageReference Include="EFCore.NamingConventions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.7" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
@@ -26,5 +25,7 @@
     <ProjectReference Include="..\Malaria.DataLayer\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Malaria.DataLayer\EfCore\EfCore.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://codemagic.io/codemagic-schema.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

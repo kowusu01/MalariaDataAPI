@@ -45,6 +45,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "CurrentEnvironmentLabel": "Using local Postgres",
+        "EnvName": "Local",
+        "EnvDescr": "Postgres",
         "DataSourceType": "Server"
 
       },

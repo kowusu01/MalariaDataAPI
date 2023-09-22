@@ -9,10 +9,10 @@ using EfCoreLayer.WorldInfo;
 using Services.Queries;
 
 using DataAccess;
-using QueryServices.HealthTest;
+using Services.HealthCheck;
 using BusinessQueries.TaskRunners.WorldInfo;
 using BusinessQueries.Tasks.WorldInfo;
-
+using QueryServices.Interfaces;
 
 namespace API.Startup
 {
@@ -71,19 +71,29 @@ namespace API.Startup
         {
             // we are using Postgres, we just need to figure out where the config is coming from
             // use local postgres instance hosted by docker, read config from app settings, no big deal
-
             
             // now build the connection string
             string connectionString = string.Format(DBConstants.ConnectionStringTemplate, builder.Configuration[DBConstants.DBServer],
                 builder.Configuration[DBConstants.DBInstance], builder.Configuration[DBConstants.DBUser], builder.Configuration[DBConstants.DBPassword]);
 
             // configure the db context
-            builder.Services.AddDbContext<WorlInfoApiDbContext>(options =>
-                options
-                    .UseNpgsql(connectionString)
-                    .UseSnakeCaseNamingConvention() // allows table name like customer_order to become CustomerOrder in the model
-                    .EnableSensitiveDataLogging()   // use this for debugging and development ONLY!
-            );
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddDbContext<WorlInfoApiDbContext>(options =>
+                    options
+                        .UseNpgsql(connectionString)
+                        .UseSnakeCaseNamingConvention() // allows table name like customer_order to become CustomerOrder in the model
+                        .EnableSensitiveDataLogging()   // use this for debugging and development ONLY!
+                );
+            }
+            else
+            {
+                builder.Services.AddDbContext<WorlInfoApiDbContext>(options =>
+                    options
+                        .UseNpgsql(connectionString)
+                        .UseSnakeCaseNamingConvention() // allows table name like customer_order to become CustomerOrder in the model
+                );
+            }
 
         }
 
@@ -104,7 +114,9 @@ namespace API.Startup
             var services = scope.ServiceProvider;
 
             // retrieve the dbcontext object from the DI
+            
             var dbContext = services.GetRequiredService<WorlInfoApiDbContext>();
+            dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
 
             Seeding.CreateCountryListAsync(dbContext, builder.Configuration[EnvironmentConstants.Name], builder.Configuration[EnvironmentConstants.Descr]);
@@ -126,7 +138,7 @@ namespace API.Startup
             builder.Services.AddScoped<IDataAccessCountries, DataAccessCountries>();
 
             // healthcheck
-            builder.Services.AddScoped<IHealthCheckInterface, HealthCheckServicecs.HealthTestService>();
+            builder.Services.AddScoped<IHealthCheckInterface, WorldInfoApiHealthCheckService>();
             
         }
     }    

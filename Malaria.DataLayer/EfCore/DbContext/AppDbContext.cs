@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Common.Models.MalariaData;
+﻿using Microsoft.EntityFrameworkCore;
+
 using Common.Models;
+using Common.Models.Malaria;
 
 namespace EfCoreLayer.MalariaData
 {
     public partial class AppDbContext : DbContext
     {
         public AppDbContext()
-        {
+        {            
         }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
@@ -20,12 +18,10 @@ namespace EfCoreLayer.MalariaData
 
         public virtual DbSet<EnvInfo> EnvInfos { get; set; } = null!;
 
+        public virtual DbSet<ReportedData> ReportedData { get; set; } = null!;
         public virtual DbSet<LoadStat> LoadStats { get; set; } = null!;
-        public virtual DbSet<CasesReportedComplete> CasesReportedCompletes { get; set; } = null!;
         public virtual DbSet<CasesReportedBad> CasesReportedBads { get; set; } = null!;
-        public virtual DbSet<DataIssuesDetail> DataIssuesDetails { get; set; } = null!;
-
-               
+        public virtual DbSet<DataIssuesDetail> DataIssuesDetails { get; set; } = null!;               
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -70,9 +66,9 @@ namespace EfCoreLayer.MalariaData
 
             });
 
-            modelBuilder.Entity<CasesReportedComplete>(entity =>
+            modelBuilder.Entity<ReportedData>(entity =>
             {
-                entity.ToTable("cases_reported_complete");
+                entity.ToTable("reported_data");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -173,9 +169,9 @@ namespace EfCoreLayer.MalariaData
                     .HasColumnName("load_status")
                     .HasMaxLength(25);
 
-                entity.Property(e => e.Descr)
+                entity.Property(e => e.Region)
                     .HasMaxLength(255)
-                    .HasColumnName("descr");
+                    .HasColumnName("region");
 
                 entity.Property(e => e.ErrorMessage)
                     .HasMaxLength(255)

@@ -1,0 +1,4 @@
+docker build notes
+
+- docker build -t zkot2/malaria-data.api:v1 -f Malaria.API/Dockerfile .
+- docker build -t zkot2/world-info.api:v1 -f WorldInfo.API/Dockerfile .

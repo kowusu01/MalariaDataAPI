@@ -1,12 +1,12 @@
-﻿using Common.DataAccessParameters;
-using Common.Models.MalariaData;
+﻿using Common.QueryParameters;
+using Common.Models.Malaria;
 using DataAccess;
 
 namespace BusinessQueries.Tasks.DataLoads
 {
     public interface IDataLoadQueryTask
     {
-        Task<IEnumerable<LoadStat>> ExecuteTask(DataAccessQueryParameters queryParams);
+        Task<IEnumerable<LoadStat>> ExecuteTask(QueryParameters queryParams);
     }
 
     public class DataLoadQueryTask : AbstractBusinessTaskErrors, IDataLoadQueryTask
@@ -18,7 +18,7 @@ namespace BusinessQueries.Tasks.DataLoads
             _dataAccess = dataAccess;
         }
 
-        public async Task<IEnumerable<LoadStat>> ExecuteTask(DataAccessQueryParameters queryParams)
+        public async Task<IEnumerable<LoadStat>> ExecuteTask(QueryParameters queryParams)
         {
             return await _dataAccess.Get(queryParams);
         }

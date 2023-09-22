@@ -3,15 +3,16 @@
 using Microsoft.EntityFrameworkCore;
 
 using EfCoreLayer.WorldInfo;
-using Common.DataAccessParameters;
+using Common.QueryParameters;
 using EfCoreLayer.ExtensionMethods;
-using Common.Models;
+
+using Common.Models.WorldInfo;
 
 namespace DataAccess
 {
     public interface IDataAccessCountries
     {
-        Task<IEnumerable<Country>> Get(DataAccessQueryParameters queryParams);
+        Task<IEnumerable<Country>> Get(QueryParameters queryParams);
     }
     
 
@@ -24,7 +25,7 @@ namespace DataAccess
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Country>> Get(DataAccessQueryParameters queryParams)
+        public async Task<IEnumerable<Country>> Get(QueryParameters queryParams)
         {
             //return await _dbContext.CasesReportedBads.Include(badRecord => badRecord.Load).FilterBadDataSetBy(queryParams).ToListAsync();
             return await _dbContext.Countries

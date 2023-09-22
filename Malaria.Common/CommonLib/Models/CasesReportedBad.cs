@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Linq;
 
-namespace Common.Models.MalariaData
+namespace Common.Models.Malaria
 {
     public partial class CasesReportedBad
     {

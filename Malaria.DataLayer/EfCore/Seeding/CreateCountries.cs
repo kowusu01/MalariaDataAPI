@@ -1,11 +1,10 @@
 ﻿
 
 
-using Common.Models.MalariaData;
 using Common.Models;
+using Common.Models.WorldInfo;
 
 using Newtonsoft.Json;
-using Microsoft.EntityFrameworkCore;
 using EfCoreLayer.WorldInfo;
 
 namespace EfCoreLayer.Seeding
@@ -17,7 +16,7 @@ namespace EfCoreLayer.Seeding
 
             if (!dbContext.EnvInfos.Any())
             {
-                var dbEnvironmentInfo = new EnvInfo { Name = "LOCAL", Descr = "World facts api Database - InMemoryDB", DateCreated = DateTime.Now, IsActive = '1' };
+                var dbEnvironmentInfo = new EnvInfo { Name = dbEnvironment, Descr = dbEnvDescr, DateCreated = DateTime.Now, IsActive = '1' };
                 dbContext.EnvInfos.Add(dbEnvironmentInfo);
             }
             try

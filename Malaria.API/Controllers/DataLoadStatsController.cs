@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using Common.Models.MalariaData;
+using Common.Models.Malaria;
 
 using Services.Queries;
 using Common.ViewModels;
@@ -47,7 +47,13 @@ namespace MalariaDataAPI
         {
             return await _service.GetByLoadDate(load_date);
         }
-        
+
+
+        [HttpGet("status/{status}")]
+        public async Task<ActionResult<dynamic>> GetByStatus(string status)
+        {
+            return await _service.GetByLoadStatus(status);
+        }
 
 
     }

@@ -1,22 +1,22 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using Common.Models.MalariaData;
+using Common.Models.Malaria;
 
 using Services.Queries;
 using Common.ViewModels;
 
 namespace MalariaDataAPI
 {
-    [Route("api/complete-data")]
+    [Route("api/reported-data")]
     [ApiController]
     [Produces("application/json")]
-    public class CompleteCasesController : ControllerBase
+    public class ReportedDataController : ControllerBase
     {
-        private readonly ILogger<CompleteCasesController> _logger;
+        private readonly ILogger<ReportedDataController> _logger;
 
-        readonly ICompleteDataQueryService _service;
+        readonly IReportedDataQueryService _service;
 
-        public CompleteCasesController(ILogger<CompleteCasesController> logger, ICompleteDataQueryService service)
+        public ReportedDataController(ILogger<ReportedDataController> logger, IReportedDataQueryService service)
         {
             _logger = logger;
             _service = service;

@@ -3,7 +3,7 @@ using Services.Queries;
 
 namespace WorldInfo.API.RequestHandlers
 {
-    public class CountriesRequestHandlers
+    public class Countries
     {
         private readonly ILogger _logger;
         readonly ICountriesQueryService _service;
@@ -11,10 +11,10 @@ namespace WorldInfo.API.RequestHandlers
         public int DefaultPageSize { get; set; }
         public int MaxPageSize { get; set; }
 
-        public CountriesRequestHandlers(ILogger logger,
+        public Countries(ILogger logger,
             ICountriesQueryService service, 
             int defaultPageSize,
-            int maxPageSize=100)
+            int maxPageSize=1000)
         {
             _logger = logger;
             _service = service;
@@ -32,10 +32,8 @@ namespace WorldInfo.API.RequestHandlers
         public async Task<ActionResult<dynamic>> GetCountriesBy(
 
             [FromQuery(Name = "id")] int? id,           /* the unique country id */
-            [FromQuery(Name = "name")] string? name,    /* partial or full country name, e.g.  "Ghana" or "People Republic of" */
+            [FromQuery(Name = "countryCode")] string? countryCode,   
             [FromQuery(Name = "regionCode")] string? regionCode,    /* WHO region code. e.g AFR for Africa  */
-            [FromQuery(Name = "iso2")] string? iso2Digits,    /* 2-digit iso code, e.g. "gh" */
-            [FromQuery(Name = "iso3")] string? iso3Digits,    /* 3-digit iso code, e.g. "gha" */
             [FromQuery(Name = "isoNum")] string? isoNumber,  /* e.g. "288" */
 
             [FromQuery(Name = "page")] int? page, /* page number in a paginated list, e.g. 2 */
@@ -49,14 +47,13 @@ namespace WorldInfo.API.RequestHandlers
 
             if (id!=null)
                 return await _service.GetById(id.Value);  //  no pagination required
-            if (name!=null)
-                return await _service.GetByCountryName(name, page, pageSize);  
+            
+            if (countryCode !=null)
+                return await _service.GetByCountryCode(countryCode, page, pageSize);  
+            
             if (regionCode != null)
                 return await _service.GetByRegionCode(regionCode, page, pageSize);  
-            if (iso2Digits!=null)
-                return await _service.GetByISO2(iso2Digits);
-            if (iso3Digits!=null)
-                return await _service.GetByISO3(iso3Digits);
+            
             if (isoNumber != null)
                 return await _service.GetByISONumber(isoNumber);
             else
@@ -66,24 +63,7 @@ namespace WorldInfo.API.RequestHandlers
         public async Task<ActionResult<dynamic>> GetById(int id)
         {
             return await _service.GetById(id);
-        }
-       
-        public async Task<ActionResult<dynamic>> GetByRegionName(string regionName, int? page, int? pageSize)
-        {
-            page = (page != null && page > 0) ? page : 1;
-            pageSize = (pageSize != null && pageSize > 0) ? pageSize : DefaultPageSize;
-            pageSize = (pageSize > 0 && pageSize < MaxPageSize + 1) ? pageSize : MaxPageSize;
+        }              
 
-            return await _service.GetByRegionName(regionName, page, pageSize);
-        }
-
-        public async Task<ActionResult<dynamic>> GetByRegionCode(string regionCode, int? page, int? pageSize)
-        {
-            page = (page != null && page > 0) ? page : 1;
-            pageSize = (pageSize != null && pageSize > 0) ? pageSize : DefaultPageSize;
-            pageSize = (pageSize > 0 && pageSize < MaxPageSize + 1) ? pageSize : MaxPageSize;
-
-            return await _service.GetByRegionCode(regionCode, page, pageSize);
-        }
     }
 }

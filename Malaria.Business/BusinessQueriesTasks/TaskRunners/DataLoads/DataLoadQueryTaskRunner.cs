@@ -1,7 +1,7 @@
 ﻿using Business.QueryTaskRunners;
 using BusinessQueries.Tasks.DataLoads;
-using Common.DataAccessParameters;
-using Common.Models.MalariaData;
+using Common.QueryParameters;
+using Common.Models.Malaria;
 
 
 
@@ -10,7 +10,7 @@ namespace BusinessQueries.TaskRunners.DataLoads
 
     public interface IDataLoadQueryTaskRunner : IBaseQueryInterface
     {
-        Task<IEnumerable<LoadStat>> RunTasks(DataAccessQueryParameters queryParams);
+        Task<IEnumerable<LoadStat>> RunTasks(QueryParameters queryParams);
     }
 
     /// <summary>
@@ -33,7 +33,7 @@ namespace BusinessQueries.TaskRunners.DataLoads
             //_appDbContext = appDbContext;
         }
 
-        public async Task<IEnumerable<LoadStat>> RunTasks(DataAccessQueryParameters queryParams)
+        public async Task<IEnumerable<LoadStat>> RunTasks(QueryParameters queryParams)
         {
             return await _dataLoadQueryTask.ExecuteTask(queryParams);
         }

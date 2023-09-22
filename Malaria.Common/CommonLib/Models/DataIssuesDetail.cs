@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Common.Models.MalariaData
+namespace Common.Models.Malaria
 {
     [DataContract]
     public partial class DataIssuesDetail

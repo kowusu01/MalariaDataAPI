@@ -1,5 +1,5 @@
-﻿using Common.DataAccessParameters;
-using Common.Models.MalariaData;
+﻿using Common.QueryParameters;
+using Common.Models.Malaria;
 using DataAccess;
 
 
@@ -7,7 +7,7 @@ namespace BusinessQueries.Tasks.DataLoads
 {
     public interface IBadDataQueryTask
     {
-        Task<IEnumerable<CasesReportedBad>> ExecuteTask(DataAccessQueryParameters queryParams);
+        Task<IEnumerable<CasesReportedBad>> ExecuteTask(QueryParameters queryParams);
     }
 
     public class BadDataQueryTask : AbstractBusinessTaskErrors, IBadDataQueryTask
@@ -19,7 +19,7 @@ namespace BusinessQueries.Tasks.DataLoads
             _dataAccess = dataAccess;
         }
 
-        public async Task<IEnumerable<CasesReportedBad>> ExecuteTask(DataAccessQueryParameters queryParams)
+        public async Task<IEnumerable<CasesReportedBad>> ExecuteTask(QueryParameters queryParams)
         {
             return await _dataAccess.Get(queryParams);
         }

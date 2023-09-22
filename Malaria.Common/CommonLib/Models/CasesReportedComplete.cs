@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Common.Models.MalariaData
+namespace Common.Models.Malaria
 {
     public partial class CasesReportedComplete
     {

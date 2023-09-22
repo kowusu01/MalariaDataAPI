@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace Common.Models.MalariaData
+namespace Common.Models.Malaria
 {
     [DataContract]
     public partial class LoadStat
@@ -13,9 +11,9 @@ namespace Common.Models.MalariaData
         [JsonPropertyOrder(1)]
         public int Id { get; set; }
 
-        [DataMember(Name = "Description")]
+        [DataMember(Name = "Region")]
         [JsonPropertyOrder(2)]
-        public string? Descr { get; set; }
+        public string? Region { get; set; }
 
         [DataMember]
         [JsonPropertyOrder(3)]

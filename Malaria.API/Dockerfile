@@ -1,21 +1,24 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-
 WORKDIR /app
-COPY . /app
-
-
-# container port 80
-# in the docker-compose, this will be mapped to port 8081 on the host
 EXPOSE 80
-
-# currently not mapped in the docker compose
 EXPOSE 443
 
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
-# healthcheck 
-HEALTHCHECK CMD	curl --fail http://localhost:8081/api/health-check/db
+WORKDIR /src
+COPY ["Malaria.API/MalariaDataAPI.csproj", "Malaria.API/"]
+RUN dotnet restore "Malaria.API/MalariaDataAPI.csproj"
 
-# entrypoiunt
+COPY . .
+WORKDIR "/src/Malaria.API"
+RUN dotnet build "MalariaDataAPI.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "MalariaDataAPI.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "MalariaDataAPI.dll"]

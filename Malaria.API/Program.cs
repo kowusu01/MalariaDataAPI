@@ -1,8 +1,9 @@
 using API.Startup;
 using Common.Contants;
-using EfCoreLayer;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Services.Queries;
+using WorldInfo.API.RequestHandlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +51,22 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(options => StartupHelper.SetUpOpenApiInfo(options));
 
 var app = builder.Build();
+
+// add additional routes
+using IServiceScope scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+var queryServices = services.GetService<IQueryOperationsServiceInterface>();
+Explore requestHandlers = new Explore(
+    app.Logger,
+    queryServices,
+    Convert.ToInt32(builder.Configuration["DefaultPageSize"])
+    );
+
+app.MapGet("api/malaria-data/sum", requestHandlers.Sum);
+app.MapGet("api/malaria-data/count", requestHandlers.Count);
+app.MapGet("api/malaria-data/min", requestHandlers.Min);
+app.MapGet("api/malaria-data/max", requestHandlers.Max);
+
 StartupHelper.EnsureDbCreated(builder, app);
 
 
@@ -76,7 +93,6 @@ if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_K
     app.Logger.LogInformation($"Currently allowing requests from localhost port: {builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_KEY]}");
 }
 
-
 if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]))
 {
     app.Logger.LogInformation($"CORS ALLOWED_METHODS: {builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]}");
@@ -84,7 +100,6 @@ if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_
 
 // seed the database if using InMemory
 StartupHelper.SeedDatabase(builder, app);
-
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -99,7 +114,6 @@ app.MapControllers();
 app.Logger.LogInformation("Calling app.Start()...  " + DateTime.Now);
 
 app.Start();
-
 
 // get address that the server is running on 
 var server = app.Services.GetService<IServer>();

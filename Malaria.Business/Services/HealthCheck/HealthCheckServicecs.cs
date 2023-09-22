@@ -1,27 +1,25 @@
 ﻿using Common.Services;
 using Common.ViewModels;
 using EfCoreLayer.MalariaData;
+using EfCoreLayer.WorldInfo;
 using Microsoft.Extensions.Logging;
 
-
-//using static QueryServices.HealthTest.HealthCheckServicecs;
-
-namespace QueryServices.HealthTest
+namespace Services.HealthCheck
 {
     public class HealthCheckServicecs
     {
-        public class HealthTestService : AbstractHealthCheckService
+        public class HealthCheckService<T> : AbstractHealthCheckService where T : AppDbContext
         {
-            readonly ILogger<HealthTestService> _logger;
-            AppDbContext _dbContext;
+            readonly ILogger<HealthCheckService<T>> _logger;
+            T _dbContext;
 
-            public HealthTestService(ILogger<HealthTestService> logger, AppDbContext dbContext)
+            public HealthCheckService(ILogger<HealthCheckService<T>> logger, T dbContext)
             {
                 _logger = logger;
                 _dbContext = dbContext;
             }
 
-            public override HealthCheckMessage GetDbTestString()
+            public override HealthCheckMessage PerformDbHealthCheck()
             {
 
                 string message = $"OK. { this.GetType().Name } - Successfully connected to database but no environment information was available in the db.";

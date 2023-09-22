@@ -3,15 +3,15 @@
 using Microsoft.EntityFrameworkCore;
 
 using EfCoreLayer.MalariaData;
-using Common.DataAccessParameters;
-using Common.Models.MalariaData;
+using Common.QueryParameters;
+using Common.Models.Malaria;
 using EfCoreLayer.ExtensionMethods;
 
 namespace DataAccess
 {
     public interface IDataAccessDataIssuesDetails
     {
-        Task<IEnumerable<DataIssuesDetail>> Get(DataAccessQueryParameters queryParams);
+        Task<IEnumerable<DataIssuesDetail>> Get(QueryParameters queryParams);
     }
     
 
@@ -24,7 +24,7 @@ namespace DataAccess
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<DataIssuesDetail>> Get(DataAccessQueryParameters queryParams)
+        public async Task<IEnumerable<DataIssuesDetail>> Get(QueryParameters queryParams)
         {
             //return await _dbContext.DataIssuesDetails.Include(x=>x.Load).FilterDataIssuesSetBy(queryParams).ToListAsync();
             return await _dbContext.DataIssuesDetails.FilterDataIssuesSetBy(queryParams).ToListAsync();

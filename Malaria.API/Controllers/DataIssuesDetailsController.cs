@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using Common.Models.MalariaData;
+using Common.Models.Malaria;
 
 using Services.Queries;
 using Common.ViewModels;

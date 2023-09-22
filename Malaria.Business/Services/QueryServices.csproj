@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="HealthCheck\**" />
+    <EmbeddedResource Remove="HealthCheck\**" />
+    <None Remove="HealthCheck\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="IMalariaDataService.cs" />
     <Compile Remove="MalariaDataService.cs" />
     <Compile Remove="StudentService.cs" />

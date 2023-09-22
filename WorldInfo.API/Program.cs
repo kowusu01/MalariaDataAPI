@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using System.Xml.Linq;
+using QueryServices.Interfaces;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,15 +80,12 @@ if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_K
     app.Logger.LogInformation($"Currently allowing requests from localhost port: {builder.Configuration[CorsConfig.CORS_ALLOWED_DOMAIN_KEY]}");
 }
 
-
 if (!string.IsNullOrEmpty(builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]))
 {
     app.Logger.LogInformation($"CORS ALLOWED_METHODS: {builder.Configuration[CorsConfig.CORS_ALLOWED_METHODS_KEY]}");
 }
 
-// seed the database if using InMemory
 StartupHelper.SeedDatabase(builder, app);
-
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -101,17 +100,23 @@ app.UseAuthorization();
 using IServiceScope scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
+var healthService = services.GetRequiredService<IHealthCheckInterface>();
+var HealthCheck = new HealthCheck(app.Logger, healthService);
+
 var countriesQueryService = services.GetRequiredService<ICountriesQueryService>();
-CountriesRequestHandlers handlers = new CountriesRequestHandlers(
+Countries handlers = new Countries(
     app.Logger, 
     countriesQueryService, 
     Convert.ToInt32(builder.Configuration["DefaultPageSize"])
     );
 
+app.MapGet("api/health/basic", HealthCheck.BasicTest);
+app.MapGet("api/health/db", HealthCheck.DBTest);
+
 app.MapGet("api/countries/list", handlers.List);
 app.MapGet("api/countries/{id:int}", handlers.GetById);
-
 app.MapGet("api/countries/", handlers.GetCountriesBy);
+
 
 app.Logger.LogInformation("Calling app.Start()...  " + DateTime.Now);
 app.Start();

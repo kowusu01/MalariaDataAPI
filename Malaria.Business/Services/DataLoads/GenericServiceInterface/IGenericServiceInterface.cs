@@ -1,10 +1,4 @@
-﻿using Business.QueryTaskRunners;
-using Common.Contants;
-using Common.DataAccessParameters;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-
-namespace Services.Queries
+﻿namespace Services.Queries
 {
     public interface IGenericServiceInterface
     {
@@ -22,11 +16,8 @@ namespace Services.Queries
 
     public interface ICountriesAndRegionsServiceInterface
     {
-        Task<dynamic> GetByCountryName(string countryName, int? page, int? pageSize, int defaultPageSize = 10);
-        Task<dynamic> GetByRegionName(string regionName, int? page, int? pageSize, int defaultPageSize = 10);
+        Task<dynamic> GetByCountryCode(string countryName, int? page, int? pageSize, int defaultPageSize = 10);
         Task<dynamic> GetByRegionCode(string regionCode, int? page, int? pageSize, int defaultPageSize = 10);
-        Task<dynamic> GetByISO2(string iso2Digits);
-        Task<dynamic> GetByISO3(string iso3Digits);
         Task<dynamic> GetByISONumber(string isoNumber);
     }
 

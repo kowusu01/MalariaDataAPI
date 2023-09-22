@@ -1,10 +1,6 @@
 ﻿
 
-using CsvHelper.Configuration;
-using CsvHelper.Configuration.Attributes;
-
-
-namespace Common.Models
+namespace Common.Models.WorldInfo
 {
     public partial class Country
     {

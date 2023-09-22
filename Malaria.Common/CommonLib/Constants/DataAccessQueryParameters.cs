@@ -1,10 +1,10 @@
 ﻿
 using Common.Contants;
-namespace Common.DataAccessParameters
+namespace Common.QueryParameters
 {
-    public class DataAccessQueryParameters
+    public class QueryParameters
     {
-        public DataAccessQueryParameters()
+        public QueryParameters()
         {
             PaginationInfo.Page = 1;
             PaginationInfo.PageSize = 1000;
@@ -22,6 +22,4 @@ namespace Common.DataAccessParameters
         public ListPagination PaginationInfo {
             get { return _pagination; } set { _pagination = value; } }
     }
-    
-
-}
+ }

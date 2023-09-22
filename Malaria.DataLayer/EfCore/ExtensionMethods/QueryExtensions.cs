@@ -1,14 +1,16 @@
 ﻿
 using Common.Contants;
-using Common.Models.MalariaData;
-using Common.DataAccessParameters;
+using Common.Models;
+using Common.Models.Malaria;
+using Common.QueryParameters;
 
 namespace EfCoreLayer.ExtensionMethods
 {
     public static partial class QueryExtensions
     {
-        public static IQueryable<LoadStat>  FilterDataLoadStatsSetBy(this IQueryable<LoadStat> efCoreData, DataAccessQueryParameters queryParameters)
+        public static IQueryable<LoadStat>  FilterDataLoadStatsSetBy(this IQueryable<LoadStat> efCoreData, QueryParameters queryParameters)
         {
+
             if (string.IsNullOrEmpty(queryParameters.FilterByColumnValue))
                 return efCoreData;
 
@@ -19,7 +21,10 @@ namespace EfCoreLayer.ExtensionMethods
 
                 case FilterByColumnEnum.Id:
                     int id = int.Parse(queryParameters.FilterByColumnValue);
-                    return efCoreData.Where(x=>x.Id == id);                
+                    return efCoreData.Where(x=>x.Id == id);
+
+                case FilterByColumnEnum.Status:
+                    return efCoreData.Where(x => x.LoadStatus.ToLower()==queryParameters.FilterByColumnValue.ToLower());
 
                 case FilterByColumnEnum.LoadTimestamp:
                     var results = efCoreData;
@@ -38,7 +43,7 @@ namespace EfCoreLayer.ExtensionMethods
             }
         }
 
-        public static IQueryable<CasesReportedBad> FilterBadDataSetBy(this IQueryable<CasesReportedBad> efCoreData, DataAccessQueryParameters queryParameters)
+        public static IQueryable<CasesReportedBad> FilterBadDataSetBy(this IQueryable<CasesReportedBad> efCoreData, QueryParameters queryParameters)
         {
             if (string.IsNullOrEmpty(queryParameters.FilterByColumnValue))
                 return efCoreData;
@@ -78,8 +83,18 @@ namespace EfCoreLayer.ExtensionMethods
             }
         }
 
-        public static IQueryable<CasesReportedComplete> FilterGoodDataSetBy(this IQueryable<CasesReportedComplete> efCoreData, DataAccessQueryParameters queryParameters)
+        public static IQueryable<ReportedData> FilterReportedDataSetBy(this IQueryable<ReportedData> efCoreData, QueryParameters queryParameters)
         {
+            /*var groupedValues = efCoreData.GroupBy(
+                x => x.Country, x => x.NumDeaths
+                ).Sum(x => x.Key);
+    
+
+            foreach(var group in groupedValues)
+            {
+                Console.WriteLine($"Key: {group.Key} - Value: {group.}");
+            }        */
+
             if (string.IsNullOrEmpty(queryParameters.FilterByColumnValue))
                 return efCoreData;
 
@@ -118,7 +133,7 @@ namespace EfCoreLayer.ExtensionMethods
             }
         }
 
-        public static IQueryable<DataIssuesDetail> FilterDataIssuesSetBy(this IQueryable<DataIssuesDetail> efCoreData, DataAccessQueryParameters queryParameters)
+        public static IQueryable<DataIssuesDetail> FilterDataIssuesSetBy(this IQueryable<DataIssuesDetail> efCoreData, QueryParameters queryParameters)
         {
             if (string.IsNullOrEmpty(queryParameters.FilterByColumnValue))
                 return efCoreData;

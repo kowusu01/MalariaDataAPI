@@ -1,5 +1,5 @@
-﻿using Common.DataAccessParameters;
-using Common.Models.MalariaData;
+﻿using Common.QueryParameters;
+using Common.Models.Malaria;
 
 
 

@@ -70,7 +70,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Dockerfile">
+    <None Update="Dockerfile-keep">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

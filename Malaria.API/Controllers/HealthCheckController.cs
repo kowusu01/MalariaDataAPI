@@ -1,7 +1,8 @@
 ﻿
 using Common.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using QueryServices.HealthTest;
+using Services.HealthCheck;
+using QueryServices.Interfaces;
 
 namespace MalariaDataAPI
 {
@@ -26,10 +27,10 @@ namespace MalariaDataAPI
         [HttpGet("basic")]
         public HealthCheckMessage BasicTest()
         {
-            _logger.LogInformation($"Basic health test: {_testService.GetBasicHeatlthTestString().Message} - {_testService.GetBasicHeatlthTestString().Timestamp}");
+            _logger.LogInformation($"Basic health test: {_testService.PerformBasicHeatlthCheck().Message} - {_testService.PerformBasicHeatlthCheck().Timestamp}");
             
-            return new HealthCheckMessage { Message = _testService.GetBasicHeatlthTestString().Message,
-                Timestamp = _testService.GetBasicHeatlthTestString().Timestamp
+            return new HealthCheckMessage { Message = _testService.PerformBasicHeatlthCheck().Message,
+                Timestamp = _testService.PerformBasicHeatlthCheck().Timestamp
             };
         }
 
@@ -40,7 +41,7 @@ namespace MalariaDataAPI
         [HttpGet("db")]
         public HealthCheckMessage DBTest()
         {
-            HealthCheckMessage testMessage = _testService.GetDbTestString();
+            HealthCheckMessage testMessage = _testService.PerformDbHealthCheck();
             _logger.LogInformation(string.Format("{0} - {1}", testMessage.Message, testMessage.Timestamp));
             return testMessage;
         }

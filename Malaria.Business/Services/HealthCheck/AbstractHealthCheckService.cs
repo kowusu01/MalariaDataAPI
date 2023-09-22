@@ -1,11 +1,11 @@
 ﻿using Common.ViewModels;
-using QueryServices.HealthTest;
+using QueryServices.HealthCheck;
 
 namespace Common.Services
 {
     public abstract class AbstractHealthCheckService: IHealthCheckInterface
     {
-        public dynamic GetBasicHeatlthTestString()
+        public dynamic PerformBasicHeatlthCheck()
         {
             HealthCheckMessage testData = new HealthCheckMessage()
             {
@@ -15,7 +15,7 @@ namespace Common.Services
             return testData;
         }
 
-        public abstract HealthCheckMessage GetDbTestString();
+        public abstract HealthCheckMessage PerformDbHealthCheck();
 
     }
 

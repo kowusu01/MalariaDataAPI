@@ -94,17 +94,15 @@ namespace Common.Contants
         Descr,
         LoadTimestamp,
         FilePath,
+        Status,
         Completed,
         NumRecords,
         BadDataCount,
         WarningDataCount,
         IssueType,
 
-        CountryName,
-        ISO2,
-        ISO3,
         ISONum,
-        RegionName,
+        CountryCode,
         RegionCode
     };
 

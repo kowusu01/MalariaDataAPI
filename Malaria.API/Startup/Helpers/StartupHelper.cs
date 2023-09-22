@@ -9,10 +9,12 @@ using EfCoreLayer.MalariaData;
 using Services.Queries;
 
 using DataAccess;
-using QueryServices.HealthTest;
-using Common.Models.MalariaData;
+using Services.HealthCheck;
+using Common.Models;
 using BusinessQueries.TaskRunners.DataLoads;
 using BusinessQueries.Tasks.DataLoads;
+using QueryServices.Interfaces;
+using BusinessQueries.TaskRunners.WorldInfo;
 
 namespace API.Startup
 {
@@ -78,12 +80,24 @@ namespace API.Startup
                 builder.Configuration[DBConstants.DBInstance], builder.Configuration[DBConstants.DBUser], builder.Configuration[DBConstants.DBPassword]);
 
             // configure the db context
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options
-                    .UseNpgsql(connectionString)
-                    .UseSnakeCaseNamingConvention() // allows table name like customer_order to become CustomerOrder in the model
-                    .EnableSensitiveDataLogging()   // use this for debugging and development ONLY!
-            );
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddDbContext<AppDbContext>(options =>
+                    options
+                        .UseNpgsql(connectionString)
+                        .UseSnakeCaseNamingConvention() // allows table name like customer_order to become CustomerOrder in the model
+                        .EnableSensitiveDataLogging()   // use this for debugging and development ONLY!
+                );
+            }
+            else
+            {
+                builder.Services.AddDbContext<AppDbContext>(options =>
+                                    options
+                                        .UseNpgsql(connectionString)
+                                        .UseSnakeCaseNamingConvention() // allows table name like customer_order to become CustomerOrder in the model
+                                );
+
+            }
 
         }
 
@@ -106,6 +120,7 @@ namespace API.Startup
 
             // retrieve the dbcontext object from the DI
             var dbContext = services.GetRequiredService<AppDbContext>();
+            dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
 
             if (!dbContext.EnvInfos.Any())
@@ -143,30 +158,33 @@ namespace API.Startup
         {
             // services
             builder.Services.AddScoped<IDataLoadQueryService, DataLoadQueryService>();
-            builder.Services.AddScoped<ICompleteDataQueryService, CompleteDataQueryService>();
+            builder.Services.AddScoped<IReportedDataQueryService, ReportedDataQueryService>();
+            builder.Services.AddScoped<IQueryOperationsServiceInterface, QueryOperationsService>();
             builder.Services.AddScoped<IBadDataQueryService, BadDataQueryService>();
             builder.Services.AddScoped<IDataIssuesDetailsQueryService, DataIssuesDetailsQueryService>();
 
             // task runners
             builder.Services.AddScoped<IDataLoadQueryTaskRunner, DataLoadQueryTaskRunner>();
-            builder.Services.AddScoped<ICompleteDataQueryTaskRunner, CompleteDataQueryTaskRunner>();
+            builder.Services.AddScoped<IReportedDataQueryTaskRunner, ReportedDataQueryTaskRunner>();
+            builder.Services.AddScoped<IQueryOperationsTaskRunner, QueryOperationsTaskRunner>();
             builder.Services.AddScoped<IBadDataQueryTaskRunner, BadDataQueryTaskRunner>();
             builder.Services.AddScoped<IDataIssuesDetailsQueryTaskRunner, DataIssuesDetailsQueryTaskRunner>();
             
             // tasks
             builder.Services.AddScoped<IDataLoadQueryTask, DataLoadQueryTask>();
-            builder.Services.AddScoped<ICompleteDataQueryTask, CompleteDataQueryTask>();
+            builder.Services.AddScoped<IReportedDataQueryTask, ReportedDataQueryTask>();
+            builder.Services.AddScoped<IQueryOperationsTask, QueryOperationsTask>();
             builder.Services.AddScoped<IBadDataQueryTask, BadDataQueryTask>();
             builder.Services.AddScoped<IDataIssuesDetailsQueryTask, DataIssuesDetailsQueryTask>();
 
             // data access
             builder.Services.AddScoped<IDataAccessLoadStats, DataAccessLoadStats>();
-            builder.Services.AddScoped<IDataAccessGoodData, DataAccessCompleteData>();
-
+            builder.Services.AddScoped<IDataAccessReportedData, DataAccessReportedData>();
+            builder.Services.AddScoped<IDataAccessQueryOperations, DataAccessQueryOperations>();
             builder.Services.AddScoped<IDataAccessBadData, DataAccessBadData>();
             builder.Services.AddScoped<IDataAccessDataIssuesDetails, DataAccessDataIssuesDetails>();
 
-            builder.Services.AddScoped<IHealthCheckInterface, HealthCheckServicecs.HealthTestService>();
+            builder.Services.AddScoped<IHealthCheckInterface, MalariaApiHealthCheckServicecs>();
             //
         }
     }    

@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 using EfCoreLayer.MalariaData;
 using Common.QueryParameters;
-using Common.Models.Malaria;
-using EfCoreLayer.ExtensionMethods;
 
 namespace DataAccess
 {

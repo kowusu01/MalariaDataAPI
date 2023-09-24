@@ -20,7 +20,7 @@ namespace EfCoreLayer.MalariaData
 
         public virtual DbSet<ReportedData> ReportedData { get; set; } = null!;
         public virtual DbSet<LoadStat> LoadStats { get; set; } = null!;
-        public virtual DbSet<CasesReportedBad> CasesReportedBads { get; set; } = null!;
+        //public virtual DbSet<CasesReportedBad> CasesReportedBads { get; set; } = null!;
         public virtual DbSet<DataIssuesDetail> DataIssuesDetails { get; set; } = null!;               
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -30,6 +30,8 @@ namespace EfCoreLayer.MalariaData
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region EXCLUDE
+            /*
             modelBuilder.Entity<CasesReportedBad>(entity =>
             {
                 entity.ToTable("cases_reported_bad");
@@ -65,6 +67,8 @@ namespace EfCoreLayer.MalariaData
                     .HasColumnName("region");
 
             });
+            */
+            #endregion EXCLUDE
 
             modelBuilder.Entity<ReportedData>(entity =>
             {

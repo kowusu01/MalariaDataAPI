@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="DataLoads\BadData\BadDataQueryService.cs" />
     <Compile Remove="IMalariaDataService.cs" />
     <Compile Remove="MalariaDataService.cs" />
     <Compile Remove="StudentService.cs" />
@@ -23,6 +24,10 @@
     <ProjectReference Include="..\..\Malaria.DataLayer\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\..\Malaria.DataLayer\EfCore\EfCore.csproj" />
     <ProjectReference Include="..\BusinessQueriesTasks\BusinessQueries.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataLoads\BadData\" />
   </ItemGroup>
 
 </Project>

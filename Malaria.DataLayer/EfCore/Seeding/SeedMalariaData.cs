@@ -23,12 +23,12 @@ namespace EfCoreLayer.Seeding
             {
                 dbContext.LoadStats.AddRange(Seeding.GetDataLoadStatSeedData());
             }
-
+            /*
             if (!dbContext.CasesReportedBads.Any())
             {
                 dbContext.CasesReportedBads.AddRange(GetBadDataSeeding());
             }
-
+            */
             if (!dbContext.DataIssuesDetails.Any())
             {
                dbContext.DataIssuesDetails.AddRange(GetDataIssuesDetailsSeeding());
@@ -177,7 +177,8 @@ namespace EfCoreLayer.Seeding
 
                 };
         }
-
+        #region EXCLUDE
+        /*
         private static List<Common.Models.Malaria.CasesReportedBad> GetBadDataSeeding()
         {
             return new List<CasesReportedBad>() {
@@ -190,17 +191,15 @@ namespace EfCoreLayer.Seeding
                 , new CasesReportedBad{ Id=5, LoadId=2, RecordNumber = 14, Country = "Bangladesh", Year = "2017", NumCases = "4893.0", NumDeaths = "", Region = "South-East Asia" }
             };
         }
+        */
+        #endregion EXCLUDE
 
         private static List<Common.Models.Malaria.DataIssuesDetail> GetDataIssuesDetailsSeeding()
         {
             return new List<DataIssuesDetail>()
             {
-                new DataIssuesDetail{ Id=1, LoadId=1, RecordNumber=5, ColumnName="NumCases", IssueType="Error", Issue="Null or empty"},
-                new DataIssuesDetail{ Id=2, LoadId=1, RecordNumber=9, ColumnName="NumDeaths", IssueType="Error",Issue="Null or empty"},
-
-                new DataIssuesDetail{ Id=3, LoadId=2, RecordNumber=7, ColumnName="NumDeaths", IssueType="Error", Issue="Null or empty"},
-                new DataIssuesDetail{ Id=4, LoadId=2, RecordNumber=11, ColumnName="NumDeaths", IssueType="Warning", Issue="inconsistency between NumCases and NumDeaths"},
-                new DataIssuesDetail{ Id=5, LoadId=2, RecordNumber=14, ColumnName="NumDeaths", IssueType="Error", Issue="Null or empty"}
+                new DataIssuesDetail{ Id=1, LoadId=1, RecordNumber=5, Country="Nigeria", Region="Africa", ColumnName="region",  NumCases=120, NumDeaths=12, IssueType="Error", IssueCode="COUNTRY_REGION_MISMATRCH", Issue="country and region do not match"},
+                new DataIssuesDetail{ Id=2, LoadId=1, RecordNumber=9, Country="Jamaica", Region="Americas",  ColumnName="NumDeaths",NumCases=900, NumDeaths=45,  IssueType="Warning", IssueCode="NUM_CASES_ZERO_OR_NULL", Issue="Null or empty"}
             };
         }
 

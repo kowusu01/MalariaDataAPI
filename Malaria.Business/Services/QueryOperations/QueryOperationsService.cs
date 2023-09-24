@@ -1,10 +1,7 @@
 ﻿
 using BusinessQueries.TaskRunners.WorldInfo;
 using Common.QueryParameters;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.Extensions.Logging;
-using System.Xml.Linq;
 
 namespace Services.Queries
 {

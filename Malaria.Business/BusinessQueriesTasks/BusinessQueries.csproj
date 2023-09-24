@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="TaskRunners\DataLoads\BadDataQueryTaskRunner.cs" />
+    <Compile Remove="Tasks\DataLoads\BadDataQueryTask.cs" />
     <Compile Remove="Tasks\IQueryTaskInterface.cs" />
   </ItemGroup>
 

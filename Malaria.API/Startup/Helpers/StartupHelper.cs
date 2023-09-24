@@ -150,7 +150,6 @@ namespace API.Startup
                 var dbContext = services.GetRequiredService<AppDbContext>();
                 Seeding.SeedMalariaDBAsync(dbContext, "DOTNET_CORE_INMEMORY_DB", "Simple, fast, reliable in-memory database for quick prototyping.");
                 app.Logger.LogInformation("Done seeding InMemory database.  - " + DateTime.Now);
-
             }
         }
 
@@ -160,28 +159,28 @@ namespace API.Startup
             builder.Services.AddScoped<IDataLoadQueryService, DataLoadQueryService>();
             builder.Services.AddScoped<IReportedDataQueryService, ReportedDataQueryService>();
             builder.Services.AddScoped<IQueryOperationsServiceInterface, QueryOperationsService>();
-            builder.Services.AddScoped<IBadDataQueryService, BadDataQueryService>();
+           // builder.Services.AddScoped<IBadDataQueryService, BadDataQueryService>();
             builder.Services.AddScoped<IDataIssuesDetailsQueryService, DataIssuesDetailsQueryService>();
 
             // task runners
             builder.Services.AddScoped<IDataLoadQueryTaskRunner, DataLoadQueryTaskRunner>();
             builder.Services.AddScoped<IReportedDataQueryTaskRunner, ReportedDataQueryTaskRunner>();
             builder.Services.AddScoped<IQueryOperationsTaskRunner, QueryOperationsTaskRunner>();
-            builder.Services.AddScoped<IBadDataQueryTaskRunner, BadDataQueryTaskRunner>();
+            //builder.Services.AddScoped<IBadDataQueryTaskRunner, BadDataQueryTaskRunner>();
             builder.Services.AddScoped<IDataIssuesDetailsQueryTaskRunner, DataIssuesDetailsQueryTaskRunner>();
             
             // tasks
             builder.Services.AddScoped<IDataLoadQueryTask, DataLoadQueryTask>();
             builder.Services.AddScoped<IReportedDataQueryTask, ReportedDataQueryTask>();
             builder.Services.AddScoped<IQueryOperationsTask, QueryOperationsTask>();
-            builder.Services.AddScoped<IBadDataQueryTask, BadDataQueryTask>();
+            //builder.Services.AddScoped<IBadDataQueryTask, BadDataQueryTask>();
             builder.Services.AddScoped<IDataIssuesDetailsQueryTask, DataIssuesDetailsQueryTask>();
 
             // data access
             builder.Services.AddScoped<IDataAccessLoadStats, DataAccessLoadStats>();
             builder.Services.AddScoped<IDataAccessReportedData, DataAccessReportedData>();
             builder.Services.AddScoped<IDataAccessQueryOperations, DataAccessQueryOperations>();
-            builder.Services.AddScoped<IDataAccessBadData, DataAccessBadData>();
+            //builder.Services.AddScoped<IDataAccessBadData, DataAccessBadData>();
             builder.Services.AddScoped<IDataAccessDataIssuesDetails, DataAccessDataIssuesDetails>();
 
             builder.Services.AddScoped<IHealthCheckInterface, MalariaApiHealthCheckServicecs>();

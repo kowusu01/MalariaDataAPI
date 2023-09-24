@@ -43,6 +43,8 @@ namespace EfCoreLayer.ExtensionMethods
             }
         }
 
+        #region EXCLUDE
+        /*
         public static IQueryable<CasesReportedBad> FilterBadDataSetBy(this IQueryable<CasesReportedBad> efCoreData, QueryParameters queryParameters)
         {
             if (string.IsNullOrEmpty(queryParameters.FilterByColumnValue))
@@ -82,6 +84,9 @@ namespace EfCoreLayer.ExtensionMethods
                     return efCoreData;
             }
         }
+        */
+
+        #endregion EXCLUDE
 
         public static IQueryable<ReportedData> FilterReportedDataSetBy(this IQueryable<ReportedData> efCoreData, QueryParameters queryParameters)
         {
